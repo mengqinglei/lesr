@@ -1,0 +1,13 @@
+<%=form_for AccountGroup.new, class: "form-inline" do |f| %>
+  <%=f.text_field :name, placeholder: "Enter Account Group Name" %>
+  &nbsp;&nbsp;
+  <select name="account_group[first_account]">
+    <option value="">Select Main Account</option>
+    <%=Account.unlinked.each do |account| %>
+      <option value="<%= account.id %>" ><%= account.name %></option>
+    <% end %>
+  </select>
+  &nbsp;&nbsp;
+  <%=f.select :conversion_type, AccountGroup::TYPES %>
+  <%=f.submit "Create New Account Group", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,59 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h4 id="myModalLabel">Email Settings: <%=@account_group.name %></h4>
+</div>
+<%=form_for @account_group, url: update_email_setting_path(@account_group), method: :put, html: {class: "form-horizontal"} do |f|%>
+  <div class="modal-body">
+      <div class="control-group" style="margin-bottom: 10px;">
+        <label class="control-label" for="inputEmail" style="width: 60px;">To:</label>
+        <div class="controls" style="margin-left: 70px;">
+          <input type="text" id="inputEmail" name="account_group[email_setting][to]" style="width: 440px;" value="<%=@account_group.email_setting.fetch(:to, []).join(",")%>", placeholder="example@example.com, example2@example.com">
+        </div>
+      </div>
+      <div class="control-group" style="margin-bottom: 10px;">
+        <label class="control-label" for="inputCC" style="width: 60px;">CC:</label>
+        <div class="controls" style="margin-left: 70px;">
+          <input type="text" id="inputCC" name="account_group[email_setting][cc]" style="width: 440px;" value="<%=@account_group.email_setting.fetch(:cc, []).join(",")%>", placeholder="example@example.com, example2@example.com">
+        </div>
+      </div>
+      <div class="control-group" style="margin-bottom: 10px;">
+        <label class="control-label" for="inputBCC" style="width: 60px;">BCC:</label>
+        <div class="controls" style="margin-left: 70px;">
+          <input type="text" id="inputBCC" name="account_group[email_setting][bcc]" style="width: 440px;" value="<%=@account_group.email_setting.fetch(:bcc, []).join(",")%>", placeholder="example@example.com, example2@example.com">
+        </div>
+      </div>
+
+      <div class="control-group" style="margin-bottom: 10px;">
+        <label class="control-label" for="inputSubject" style="width: 60px;">Subject:</label>
+        <div class="controls" style="margin-left: 70px;">
+          <input type="text" id="inputSubject" name="account_group[email_setting][subject]" style="width: 440px;" value="<%=@account_group.email_setting.fetch(:subject, "Your SEM Report is ready!")%>">
+        </div>
+      </div>
+
+      <div class="control-group" style="margin-bottom: 10px;">
+        <label class="control-label" for="inputSubject" style="width: 60px;">Address:</label>
+        <div class="controls" style="margin-left: 70px;">
+          <input type="text" id="inputAddressee" name="account_group[email_setting][addressee]" style="width: 440px;" value="<%=@account_group.email_setting.fetch(:addressee, "")%>" placeholder="For example: Dear Mr. Smith">
+        </div>
+      </div>
+
+      <div class="control-group" style="margin-bottom: 10px;">
+        <label class="control-label" for="inputEmailBody" style="width: 60px;">Body:</label>
+        <div class="controls" style="margin-left: 70px;">
+            <textarea id="email" name="account_group[custom_email_text]" rows="8" style="width: 440px;" disabled>
+<%=@account_group.custom_email_text || @account_group.default_email_text %>
+            </textarea>
+            <textarea id="default_email" rows="8" style="width: 440px;display:none;" disabled>
+<%=@account_group.default_email_text %>
+            </textarea>
+          <%=link_to_function "Use default", "$('#email').val($('#default_email').html());$('#email').attr('name','').attr('disabled',true)", remote: true%>
+
+          <%=link_to_function "Edit text", "$('#email').removeAttr('disabled').attr('name','account_group[custom_email_text]')", remote: true, style: "float:right;"%>
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+<% end %>

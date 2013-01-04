@@ -1,0 +1,12 @@
+<% flash.each do |name, msg| %>
+  <div class="alert alert-block alert-<%=name%>">
+    <b><%=name.capitalize%></b>
+    <br>
+    <ul>
+      <% Array(msg).each do |sub_msg|%>
+        <li><%=sub_msg%></li>
+      <%end%>
+    </ul>
+  </div>
+<% end %>
+

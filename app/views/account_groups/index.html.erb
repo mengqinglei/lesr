@@ -1,0 +1,96 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">Smart SEM</a>
+      <ul class="nav">
+        <li class="active"><a href="http://www.eyehanddesign.com/SmartSEM/index.html">Reporting</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+    <%=render "layouts/flash_message" %>
+
+    <%=render "account_groups/create_account_group"%>
+
+    <hr>
+
+    <%=render "account_groups/filter" %>
+
+    <%=render "account_groups/email_status"%>
+
+    <!-- Contact Table -->
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th><input type="checkbox"></th>
+          <th>Account Group</th>
+          <th>Account(s)</th>
+          <th>Agency</th>
+          <th>Conv. Type</th>
+          <th>Last Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @account_groups.each do |group|%>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td><%=group.name%></td>
+            <td>
+              <%group.accounts.each do |account|%>
+                <li><%=account.name%></li>
+              <%end%>
+            </td>
+            <td><%=group.agency.try(:name) || "N/A"%></td>
+            <td><%=group.conversion_type%></td>
+            <td>12/12/12 9:00PM</td>
+            <td>
+              <div class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Select Action<b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li>
+                  <a data-target="#accountModal" href="<%=account_modal_path(group.id)%>" role="button" data-toggle="modal">General Settings</a>
+                  </li>
+                  <li>
+                  <a data-target="#emailModal" href="<%=email_modal_path(group.id)%>" role="button" data-toggle="modal">Email Settings</a>
+                  </li>
+                  <li><%=link_to "View Report", report_path(group.id), target: "_blank" %></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div> <!-- /container -->
+
+  <!-- Email Modal -->
+  <div id="emailModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"></div>
+
+  <!-- Account Modal -->
+  <div id="accountModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"></div>
+  <!-- Generate Modal -->
+  <div id="generateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h4 id="myModalLabel">Email Reports</h4>
+    </div>
+    <div class="modal-body">
+      You are about to email x monthly reports for 12/12/12.  Are you sure you want to do this?		
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+      <button class="btn btn-primary">Email Reports</button>
+    </div>
+  </div> 		
+
+  <script src="./Smart SEM_files/jquery-latest.js"></script>
+  <script src="./Smart SEM_files/bootstrap.min.js"></script>
+  <script src="./Smart SEM_files/bootstrap-datepicker.js"></script>
+  <script>
+    $('.date').datepicker()
+  </script>

@@ -1,4 +1,13 @@
 Lesr::Application.routes.draw do
+  get "reports/:account_group_id" => "reports#show", as: "report"
+  resources :account_groups
+  root to: "account_groups#index"
+  match "account_groups/email_modal/:account_group_id" => "account_groups#email_modal", as: "email_modal"
+  match "account_groups/edit/:account_group_id" => "account_groups#account_modal", as: "account_modal"
+  put "account_groups/edit/email/:account_group_id" => "account_groups#update_email_setting", as: "update_email_setting"
+
+  get "set_month/:month/:year" => "reports#set_month"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

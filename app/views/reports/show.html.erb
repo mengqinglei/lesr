@@ -1,0 +1,653 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href=""><%="#{@account_group.name} - #{session[:month_in_word]} #{session[:year]}"%> Report</a>
+  <ul class="nav">
+  <li class="dropdown">
+          <a id="drop1" href="http://www.eyehanddesign.com/SmartSEM/sample_report.html#" role="button" class="dropdown-toggle" data-toggle="dropdown">Jump to Section <b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+            <li><a tabindex="-1" href="#search-position-report">Search Positioning Report</a></li>
+            <li><a tabindex="-1" href="#campaign-summary">Campaign Summary</a></li>
+            <li><a tabindex="-1" href="#google-ad-words">Google Ad Words</a></li>
+            <li><a tabindex="-1" href="#google-content">Google Content</a></li>
+    <li><a tabindex="-1" href="#google-ad-performance">Google Ad Performance</a></li>
+    <li><a tabindex="-1" href="#microsoft">Microsoft</a></li>
+    <li><a tabindex="-1" href="#summary-data">Summary Data</a></li>
+          </ul>
+         </li>
+  </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<h2 id="search-position-report"><%="#{@account_group.name} - #{session[:month_in_word]} #{session[:year]}"%> Search Positioning Report</h2>
+<hr>
+<%=render 'reports/boilerplate_text'%>
+<hr>
+<%=render 'reports/google_highlight'%>
+<%=render 'reports/bing_highlight'%>
+<%=render 'reports/reporting_key'%>
+<hr>
+<%=render 'reports/campaign_summary'%>
+<hr>
+<%=render 'reports/ad_words'%>
+<hr>
+<%=render 'reports/content_targeting'%>
+<hr>
+<%=render 'reports/ad_copy_performance'%>
+<hr>
+<%=render 'reports/bing_performance'%>
+<hr>
+<%=render 'reports/summary_data'%>
+</div>
+
+<!-- CHARTS -->
+
+<script>		
+$(function () {
+var chart;
+$(document).ready(function() {
+    chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart1',
+            zoomType: 'xy'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: [{
+            categories: [
+          'Oct 12',
+          'Sep 12',
+          'Aug 12',
+          'Jul 12',
+          'Jun 12',
+          'May 12',
+          'Apr 12',
+          'Mar 12',
+          'Feb 12',
+          'Jan 12',
+          'Dec 11',
+          'Nov 11'
+          ]
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                formatter: function() {
+                    return '$'+this.value;
+                }
+            },
+            title: {
+                text: 'Spending'
+            }
+        }, { // Secondary yAxis
+            title: {
+                text: 'Clicks'
+            },
+            labels: {
+                formatter: function() {
+                    return this.value;
+                }
+            },
+            opposite: true
+        }],
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom',
+            floating: false,
+            backgroundColor: '#FFFFFF'
+        },
+        series: [{
+            name: 'Clicks',
+            color: '#4572A7',
+            type: 'line',
+            yAxis: 1,
+            data: [  
+17861,
+15092,
+18202,
+14948,
+12373,
+23842,
+14054,
+15437,
+13437,
+33514,
+16458,
+36853 
+]
+
+        }, {
+            name: 'Spending',
+            color: '#89A54E',
+            type: 'line',
+            data: [
+22148.61, 
+16184.74, 
+18240.11, 
+13831.21, 
+13874.73, 
+19228.94, 
+14681.94, 
+16542.92, 
+14630.74, 
+24998.11, 
+13234.00, 
+20879.24 
+]
+        }]
+    });
+});
+
+});	
+
+
+
+$(function () {
+var chart2;
+$(document).ready(function() {
+    chart2 = new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart2',
+            zoomType: 'xy'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: [{
+            categories: [
+          'Oct 12',
+          'Sep 12',
+          'Aug 12',
+          'Jul 12',
+          'Jun 12',
+          'May 12',
+          'Apr 12',
+          'Mar 12',
+          'Feb 12',
+          'Jan 12',
+          'Dec 11',
+          'Nov 11'
+          ]
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                formatter: function() {
+                    return '$'+this.value;
+                }
+            },
+            title: {
+                text: 'Spending'
+            }
+        }, { // Secondary yAxis
+            title: {
+                text: 'Cost Per Click'
+            },
+            labels: {
+                formatter: function() {
+                    return '$'+this.value;
+                }
+            },
+            opposite: true
+        }],
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom',
+            floating: false,
+            backgroundColor: '#FFFFFF'
+        },
+        series: [{
+            name: 'Cost Per Click',
+            color: '#4572A7',
+            type: 'line',
+            yAxis: 1,
+            data: [  
+1.24, 
+1.07, 
+1.00, 
+0.93, 
+1.12, 
+0.81, 
+1.04, 
+1.07, 
+1.09, 
+0.75, 
+0.80, 
+0.57  
+]
+
+        }, {
+            name: 'Spending',
+            color: '#89A54E',
+            type: 'line',
+            data: [
+22148.61, 
+16184.74, 
+18240.11, 
+13831.21, 
+13874.73, 
+19228.94, 
+14681.94, 
+16542.92, 
+14630.74, 
+24998.11, 
+13234.00, 
+20879.24 
+]
+        }]
+    });
+});
+
+});	
+
+$(function () {
+var chart3;
+$(document).ready(function() {
+    chart3 = new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart3',
+            zoomType: 'xy'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: [{
+            categories: [
+          'Oct 12',
+          'Sep 12',
+          'Aug 12',
+          'Jul 12',
+          'Jun 12',
+          'May 12',
+          'Apr 12',
+          'Mar 12',
+          'Feb 12',
+          'Jan 12',
+          'Dec 11',
+          'Nov 11'
+          ]
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                formatter: function() {
+                    return '$'+this.value;
+                }
+            },
+            title: {
+                text: 'Spending'
+            }
+        }, { // Secondary yAxis
+            title: {
+                text: 'Conversions'
+            },
+            labels: {
+                formatter: function() {
+                    return this.value;
+                }
+            },
+            opposite: true
+        }],
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom',
+            floating: false,
+            backgroundColor: '#FFFFFF'
+        },
+        series: [{
+            name: 'Conversions',
+            color: '#4572A7',
+            type: 'line',
+            yAxis: 1,
+            data: [  
+120,
+119,
+92,
+60,
+28,
+140,
+42,
+60,
+52,
+136,
+61,
+62  
+]
+
+        }, {
+            name: 'Spending',
+            color: '#89A54E',
+            type: 'line',
+            data: [
+22148.61, 
+16184.74, 
+18240.11, 
+13831.21, 
+13874.73, 
+19228.94, 
+14681.94, 
+16542.92, 
+14630.74, 
+24998.11, 
+13234.00, 
+20879.24 
+]
+        }]
+    });
+});
+
+});	
+
+
+$(function () {
+var chart4;
+$(document).ready(function() {
+    chart4 = new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart4',
+            zoomType: 'xy'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: [{
+            categories: [
+          'Oct 12',
+          'Sep 12',
+          'Aug 12',
+          'Jul 12',
+          'Jun 12',
+          'May 12',
+          'Apr 12',
+          'Mar 12',
+          'Feb 12',
+          'Jan 12',
+          'Dec 11',
+          'Nov 11'
+          ]
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                formatter: function() {
+                    return '$'+this.value;
+                }
+            },
+            title: {
+                text: 'Spending'
+            }
+        }, { // Secondary yAxis
+            title: {
+                text: 'Cost Per Conversion'
+            },
+            labels: {
+                formatter: function() {
+                    return '$'+this.value;
+                }
+            },
+            opposite: true
+        }],
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom',
+            floating: false,
+            backgroundColor: '#FFFFFF'
+        },
+        series: [{
+            name: 'Cost Per Conversion',
+            color: '#4572A7',
+            type: 'line',
+            yAxis: 1,
+            data: [  
+184.57, 
+136.01, 
+198.26, 
+230.52, 
+495.53, 
+137.35, 
+349.57, 
+275.72, 
+281.36, 
+183.81, 
+216.95, 
+336.76 
+]
+
+        }, {
+            name: 'Spending',
+            color: '#89A54E',
+            type: 'line',
+            data: [
+22148.61, 
+16184.74, 
+18240.11, 
+13831.21, 
+13874.73, 
+19228.94, 
+14681.94, 
+16542.92, 
+14630.74, 
+24998.11, 
+13234.00, 
+20879.24 
+]
+        }]
+    });
+});
+
+});	
+
+
+$(function () {
+var chart5;
+$(document).ready(function() {
+  
+  // Radialize the colors
+Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function(color) {
+    return {
+        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+        stops: [
+            [0, color],
+            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+        ]
+    };
+});
+
+// Build the chart
+    chart5 = new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart5',
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+    width: 1100,
+    height: 600
+        },
+        title: {
+            text: ''
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>${point.y}</b>',
+          percentageDecimals: 1
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    formatter: function() {
+                        return '<b>'+ this.point.name +'</b>: $'+ this.y + ' ('+Math.round(this.percentage)+'%)';
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Spending',
+            data: [
+['Golf Vacation Packages',5387.26], 
+['Walters Golf',3858.68],
+['Las Vegas Golf',3343.12], 
+['Golf Terms',2499.57], 
+['Bali Hai',661.46], 
+['Vacation Package Terms',620.85], 
+['Other',1697.20] 
+            ]
+        }]
+    });
+});
+
+});
+
+
+$(function () {
+var chart6;
+$(document).ready(function() {
+  
+  // Radialize the colors
+Highcharts.getOptions().colors2 = $.map(Highcharts.getOptions().colors, function(color) {
+    return {
+        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+        stops: [
+            [0, color],
+            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+        ]
+    };
+});
+
+// Build the chart
+    chart6 = new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart6',
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+    width: 1100,
+    height: 600
+        },
+        title: {
+            text: ''
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>${point.y}</b>',
+          percentageDecimals: 1
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    formatter: function() {
+                        return '<b>'+ this.point.name +'</b>: '+ this.y + ' ('+Math.round(this.percentage)+'%)';
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Spending',
+            data: [
+['Walters Golf',4555],
+['Golf Vacation Packages',2310],
+['Bali Hai',2005],
+['Las Vegas Golf',1456],
+['Royal Links',1257],
+['Golf Terms',1122],
+['Desert Pines',714],
+['Proper Name Terms',447],
+['Other',823]
+            ]
+        }]
+    });
+});
+
+});
+
+
+$(function () {
+var chart7;
+$(document).ready(function() {
+  
+  // Radialize the colors
+Highcharts.getOptions().colors3 = $.map(Highcharts.getOptions().colors, function(color) {
+    return {
+        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+        stops: [
+            [0, color],
+            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+        ]
+    };
+});
+
+// Build the chart
+    chart7 = new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart7',
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+    width: 1100,
+    height: 600
+        },
+        title: {
+            text: ''
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>${point.y}</b>',
+          percentageDecimals: 1
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    formatter: function() {
+                        return '<b>'+ this.point.name +'</b>: '+ this.y + ' ('+Math.round(this.percentage)+'%)';
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Spending',
+            data: [
+['Walters Golf',39],
+['Proper Name Terms',14],
+['Las Vegas Golf',14],
+['Golf Vacation Packages',14],
+['Vacation Package Terms',10],
+['Bali Hai',9],
+['Golf Terms',9],
+['Other',11]
+            ]
+        }]
+    });
+});
+
+});
+</script>		
