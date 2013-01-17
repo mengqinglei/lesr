@@ -17,16 +17,6 @@ class AccountGroupsController < ApplicationController
     end
   end
 
-  def email_modal
-    @account_group = AccountGroup.find(params[:account_group_id])
-    render layout: false
-  end
-
-  def account_modal
-    @account_group = AccountGroup.find(params[:account_group_id])
-    render layout: false
-  end
-
   def update
     google_account_ids = params[:account_group].delete(:google_account_ids)
     google_account_ids.reject!(&:empty?)
@@ -40,8 +30,10 @@ class AccountGroupsController < ApplicationController
     else
       @account_group = AccountGroup.find(params[:id])
       if @account_group.update_attributes(params[:account_group])
-        @account_group.accounts.update_all(account_group_id: nil)
-        Account.where(id: all_account_ids).update_all(account_group_id: params[:id])
+        old_linked_accounts = @account_group.accounts
+        old_linked_accounts.each { |x| x.account_group_id = nil; x.save }
+        new_linked_accounts = Account.where(id: all_account_ids)
+        new_linked_accounts.each { |x| x.account_group_id = params[:id]; x.save }
 
         flash[:success] = "Account Group successfully updated"
         redirect_to :back
@@ -50,6 +42,25 @@ class AccountGroupsController < ApplicationController
         redirect_to :back
       end
     end
+  end
+
+  def destroy
+    @account_group = AccountGroup.find(params[:id])
+    [Account, Campaign, AdGroup, Ad, AdStat, DomainStat, KeywordStat].each do |model|
+      model.where(account_group_id: params[:id]).update_all(account_group_id: nil)
+    end
+    @account_group.destroy
+    redirect_to :back
+  end
+
+  def email_modal
+    @account_group = AccountGroup.find(params[:account_group_id])
+    render layout: false
+  end
+
+  def account_modal
+    @account_group = AccountGroup.find(params[:account_group_id])
+    render layout: false
   end
 
   def update_email_setting

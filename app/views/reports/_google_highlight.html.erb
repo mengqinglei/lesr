@@ -1,35 +1,41 @@
-<h4>Google Highlights</h4>                  
-Total Visits: 14,689 - 22% higher than last month (11,995)<br>
-Total Sales: 120 - Almost the same as last month (119)<br>
-Total Cost: $18,068.14 - 45% higher than last month ($12,452.85)<br>
-Cost per Click: $1.23 - 18% higher than last month ($1.04)<br>
-Cost per Sale: $150.57 - 44% higher than last month ($104.65)<br>      
+<h4>Google Highlights</h4>
+<% stats = @account_group.overall_stats(@session["date"], "Google") %>
+Total Visits: <%=stats[:v][0]%> - <%=stats[:v][2]%> last month (<%=stats[:v][1]%>)<br>
+Total Sales: <%=stats[:s][0]%> - <%=stats[:s][2]%> last month (<%=stats[:s][1]%>)<br>
+Total Cost: <%=number_to_currency stats[:c][0]%> - <%=stats[:c][2]%>  last month (<%=number_to_currency stats[:c][1]%>)<br>
+Cost per Click: <%=number_to_currency stats[:cpc][0]%> - <%=stats[:cpc][2]%> last month (<%=number_to_currency stats[:cpc][1]%>)<br>
+Cost per Sale: <%=number_to_currency stats[:cps][0]%> - <%=stats[:cps][2]%> last month (<%=number_to_currency stats[:cps][1]%>)<br>
 <br>
 Top Traffic Producers:<br>
 <ol>
-  <li>'Total - Content Targeting' - Clicks: 4,555 (31%) Cost: $3,858.68 (21%) Avg. Rank: 1</li>
-  <li>'Cheap golf packages' - Clicks: 1,244 (8%) Cost: $3,105.93 (17%) Avg. Rank: 5</li>
-  <li>'Bali hai golf' - Clicks: 631 (4%) Cost: $130.94 (1%) Avg. Rank: 1</li>
-  <li>'[bali hai]' - Clicks: 485 (3%) Cost: $251.51 (1%) Avg. Rank: 1</li>
+  <% @account_group.top_traffic_stats(@session["date"], "Google").each do |x| %>
+    <li>"<%=x[0]%>" - Clicks: <%=x[1]%> (<%=x[2]%>%)
+      Cost: <%=number_to_currency x[3]%> (<%=x[4]%>%) Avg. Rank: <%=x[5]%>
+    </li>
+  <% end %>
 </ol>
 Top Sale Producers:<br> 
 <ol>
-  <li>'Total - Content Targeting' - Sales: 39 (33%) Cost per Sale: $98.94 Avg. Rank: 1</li>
-  <li>'Walters golf las vegas' - Sales: 7 (6%) Cost per Sale: $8.41 Avg. Rank: 1</li>
-  <li>'Las vegas golf package' - Sales: 7 (6%) Cost per Sale: $65.48 Avg. Rank: 3</li>
-  <li>'Golf packages las vegas' - Sales: 7 (6%) Cost per Sale: $68.44 Avg. Rank: 2</li>
+  <% @account_group.top_sales_stats(@session["date"], "Google").each do |x| %>
+    <li>"<%=x[0]%>" - Sales: <%=x[1]%> (<%=x[2]%>%)
+      Cost per Sale: <%=number_to_currency x[3]%> Avg. Rank: <%=x[4]%>
+    </li>
+  <% end %>
 </ol>
 Lowest Cost per Sale:<br> 
 <ol>
-  <li>'Mesquite golf deals' - Sales: 1 (1%) Cost per Sale: $2.77 Avg. Rank: 5</li>
-  <li>'Discount golf in las vegas' - Sales: 1 (1%) Cost per Sale: $5.02 Avg. Rank: 4</li>
-  <li>'Walters Golf' - Sales: 5 (4%) Cost per Sale: $6.21 Avg. Rank: 1</li>
-  <li>'Walters golf las vegas' - Sales: 7 (6%) Cost per Sale: $8.41 Avg. Rank: 1</li>
+  <% @account_group.best_cps_stats(@session["date"], "Google").each do |x| %>
+    <li>"<%=x[0]%>" - Sales: <%=x[1]%> (<%=x[2]%>%)
+      Cost per Sale: <%=number_to_currency x[3]%> Avg. Rank: <%=x[4]%>
+    </li>
+  <% end %>
 </ol>
 Least Effective Terms:<br> 
 <ol>
-  <li>'Cheap golf packages' - Sales: 3 (3%) Cost: $3,105.93 (17%) Cost per Sale $1,035.31</li>
-  <li>'Golf travel packages' - Sales: 1 (1%) Cost: $856.68 (5%) Cost per Sale $856.68</li>
-  <li>'Golfing las vegas' - Sales: 1 (1%) Cost: $760.41 (4%) Cost per Sale $760.41</li>
-  <li>'Golf vegas' - Sales: 1 (1%) Cost: $350.54 (2%) Cost per Sale $350.54 </li>               
+  <% @account_group.worst_cps_stats(@session["date"], "Google").each do |x| %>
+    <li>"<%=x[0]%>" - Sales: <%=x[1]%> (<%=x[2]%>%)
+      Cost: <%=number_to_currency x[3]%> (<%=x[4]%>%)
+      Cost per Sale: <%=number_to_currency x[5]%>
+    </li>
+  <% end %>
 </ol>

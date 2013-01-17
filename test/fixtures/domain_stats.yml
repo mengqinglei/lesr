@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  period: 2013-01-05
+  name: MyString
+  impression: 1
+  click: 1
+  cost: 1.5
+  conversion: 1
+  ad_group_id: 1
+  campaign_id: 1
+  account_id: 1
+  account_group_id: 1
+
+two:
+  period: 2013-01-05
+  name: MyString
+  impression: 1
+  click: 1
+  cost: 1.5
+  conversion: 1
+  ad_group_id: 1
+  campaign_id: 1
+  account_id: 1
+  account_group_id: 1

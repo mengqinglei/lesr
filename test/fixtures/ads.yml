@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  headline: MyString
+  line1: MyString
+  line2: MyString
+  display_url: MyString
+  google_ad_id: 1
+  destination_url: MyString
+  ad_group_id: 1
+  campaign_id: 1
+  account_id: 1
+  account_group_id: 1
+
+two:
+  headline: MyString
+  line1: MyString
+  line2: MyString
+  display_url: MyString
+  google_ad_id: 1
+  destination_url: MyString
+  ad_group_id: 1
+  campaign_id: 1
+  account_id: 1
+  account_group_id: 1

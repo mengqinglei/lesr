@@ -7,7 +7,7 @@ Lesr::Application.routes.draw do
   put "account_groups/edit/email/:account_group_id" => "account_groups#update_email_setting", as: "update_email_setting"
 
   get "set_month/:month/:year" => "reports#set_month"
-
+  post "reports/send_emails" => "reports#send_emails", as: "send_emails"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

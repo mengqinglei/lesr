@@ -16,8 +16,26 @@
     <%=render "account_groups/create_account_group"%>
 
     <hr>
-
-    <%=render "account_groups/filter" %>
+    <%=form_tag "/reports/send_emails", method: :post, class: "form-inline" %>
+      <!--
+      <input type="text" placeholder="Filter by Account Group" data-provide="typeahead">&nbsp;&nbsp;
+      Access Data From:&nbsp;&nbsp;
+      <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">
+        <input class="span2" size="16" type="text" value="12-02-2012" readonly="">
+        <span class="add-on"><i class="icon-calendar"></i></span>
+      </div>
+      &nbsp;&nbsp;To&nbsp;&nbsp;
+      <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">
+        <input class="span2" size="16" type="text" value="12-02-2012" readonly="">
+        <span class="add-on"><i class="icon-calendar"></i></span>
+      </div>&nbsp;&nbsp;
+      -->
+      Access Data From:&nbsp;&nbsp;
+      <input type="text" id="default_widget" class="mtz-monthpicker-widgetcontainer">
+      <input type="submit" value="Email Reports" class="btn btn-primary", data-confirm='Are you sure you want to send out the reports?'>
+      <div id="flash_message"></div>
+      <br>
+      <br>
 
     <%=render "account_groups/email_status" if false%>
 
@@ -37,7 +55,7 @@
       <tbody>
         <% @account_groups.each do |group|%>
           <tr>
-            <td><input type="checkbox"></td>
+            <td><input type="checkbox" name="account_groups[]", value=<%=group.id%>></td>
             <td><%=group.name%></td>
             <td>
               <%group.accounts.each do |account|%>
@@ -58,6 +76,7 @@
                   <a data-target="#emailModal" href="<%=email_modal_path(group.id)%>" role="button" data-toggle="modal">Email Settings</a>
                   </li>
                   <li><%=link_to "View Report", report_path(group.id), target: "_blank" %></li>
+                  <li><%=link_to "Delete Account Group", account_group_path(group.id), method: :delete %></li>
                 </ul>
               </div>
             </td>
@@ -66,6 +85,7 @@
       </tbody>
     </table>
 
+    </form>
   </div> <!-- /container -->
 
   <!-- Email Modal -->
@@ -88,9 +108,16 @@
     </div>
   </div> 		
 
-  <script src="./Smart SEM_files/jquery-latest.js"></script>
-  <script src="./Smart SEM_files/bootstrap.min.js"></script>
-  <script src="./Smart SEM_files/bootstrap-datepicker.js"></script>
   <script>
-    $('.date').datepicker()
+    $(document).ready(function(){
+      $('.date').datepicker()
+      $("#default_widget").bind("monthpicker-click-month", function(e){
+        $.get("/set_month/"+$(this).val(), function(data){
+          $("#flash_message").html(data["message"]).css("display","inline-block").fadeIn();
+          setTimeout(function() {
+              $("#flash_message").fadeOut(1000);
+            }, 1000);
+          });
+      });
+    });
   </script>

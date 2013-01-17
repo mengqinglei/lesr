@@ -1,0 +1,435 @@
+<%two_line_data = @account_group.two_line_data(@session["date"])%>
+<%ad_group_data = @account_group.ad_group_data(@session["date"])%>
+<script>
+  $(function () {
+    var chart;
+    $(document).ready(function() {
+      chart = new Highcharts.Chart({
+        plotOptions: { series: { enableMouseTracking: false, shadow: false, animation: false } },
+        chart: {
+          renderTo: 'chart1',
+              zoomType: 'xy'
+            },
+            title: {
+              text: ''
+            },
+            subtitle: {
+              text: ''
+            },
+            xAxis: [{
+              categories: <%=raw two_line_data[:months]%>
+            }],
+            yAxis: [{ // Primary yAxis
+              labels: {
+                formatter: function() {
+                  return '$'+this.value;
+                }
+              },
+              title: {
+                text: 'Spending'
+              }
+              }, { // Secondary yAxis
+              title: {
+                text: 'Clicks'
+              },
+              labels: {
+                formatter: function() {
+                  return this.value;
+                }
+              },
+              opposite: true
+            }],
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom',
+              floating: false,
+              backgroundColor: '#FFFFFF'
+            },
+            series: [{
+              name: 'Clicks',
+              color: '#4572A7',
+              type: 'line',
+              yAxis: 1,
+              data: <%=raw two_line_data[:clicks]%>
+
+              }, {
+              name: 'Spending',
+              color: '#89A54E',
+              type: 'line',
+              data: <%=raw two_line_data[:monthly_spendings]%>
+            }]
+          });
+        });
+
+      });
+
+
+
+      $(function () {
+        var chart2;
+        $(document).ready(function() {
+          chart2 = new Highcharts.Chart({
+            plotOptions: { series: { enableMouseTracking: false, shadow: false, animation: false } },
+            chart: {
+              renderTo: 'chart2',
+              zoomType: 'xy'
+            },
+            title: {
+              text: ''
+            },
+            subtitle: {
+              text: ''
+            },
+            xAxis: [{
+              categories: <%=raw two_line_data[:months]%>
+            }],
+            yAxis: [{ // Primary yAxis
+              labels: {
+                formatter: function() {
+                  return '$'+this.value;
+                }
+              },
+              title: {
+                text: 'Spending'
+              }
+              }, { // Secondary yAxis
+              title: {
+                text: 'Cost Per Click'
+              },
+              labels: {
+                formatter: function() {
+                  return '$'+this.value;
+                }
+              },
+              opposite: true
+            }],
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom',
+              floating: false,
+              backgroundColor: '#FFFFFF'
+            },
+            series: [{
+              name: 'Cost Per Click',
+              color: '#4572A7',
+              type: 'line',
+              yAxis: 1,
+              data: <%=raw two_line_data[:clicks]%>
+
+              }, {
+              name: 'Spending',
+              color: '#89A54E',
+              type: 'line',
+              data: <%=raw two_line_data[:monthly_spendings]%>
+            }]
+          });
+        });
+
+      });
+
+      $(function () {
+        var chart3;
+        $(document).ready(function() {
+          chart3 = new Highcharts.Chart({
+            plotOptions: { series: { enableMouseTracking: false, shadow: false, animation: false } },
+            chart: {
+              renderTo: 'chart3',
+              zoomType: 'xy'
+            },
+            title: {
+              text: ''
+            },
+            subtitle: {
+              text: ''
+            },
+            xAxis: [{
+              categories: <%=raw two_line_data[:months]%>
+            }],
+            yAxis: [{ // Primary yAxis
+              labels: {
+                formatter: function() {
+                  return '$'+this.value;
+                }
+              },
+              title: {
+                text: 'Spending'
+              }
+              }, { // Secondary yAxis
+              title: {
+                text: 'Conversions'
+              },
+              labels: {
+                formatter: function() {
+                  return this.value;
+                }
+              },
+              opposite: true
+            }],
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom',
+              floating: false,
+              backgroundColor: '#FFFFFF'
+            },
+            series: [{
+              name: 'Conversions',
+              color: '#4572A7',
+              type: 'line',
+              yAxis: 1,
+              data: <%=raw two_line_data[:conversions]%>
+
+              }, {
+              name: 'Spending',
+              color: '#89A54E',
+              type: 'line',
+              data: <%=raw two_line_data[:monthly_spendings]%>
+            }]
+          });
+        });
+
+      });
+
+
+      $(function () {
+        var chart4;
+        $(document).ready(function() {
+          chart4 = new Highcharts.Chart({
+            plotOptions: { series: { enableMouseTracking: false, shadow: false, animation: false } },
+            chart: {
+              renderTo: 'chart4',
+              zoomType: 'xy'
+            },
+            title: {
+              text: ''
+            },
+            subtitle: {
+              text: ''
+            },
+            xAxis: [{
+              categories: <%=raw two_line_data[:months]%>
+            }],
+            yAxis: [{ // Primary yAxis
+              labels: {
+                formatter: function() {
+                  return '$'+this.value;
+                }
+              },
+              title: {
+                text: 'Spending'
+              }
+              }, { // Secondary yAxis
+              title: {
+                text: 'Cost Per Conversion'
+              },
+              labels: {
+                formatter: function() {
+                  return '$'+this.value;
+                }
+              },
+              opposite: true
+            }],
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom',
+              floating: false,
+              backgroundColor: '#FFFFFF'
+            },
+            series: [{
+              name: 'Cost Per Conversion',
+              color: '#4572A7',
+              type: 'line',
+              yAxis: 1,
+              data: <%=raw two_line_data[:cpss]%>
+
+              }, {
+              name: 'Spending',
+              color: '#89A54E',
+              type: 'line',
+              data: <%=raw two_line_data[:monthly_spendings]%>
+            }]
+          });
+        });
+
+      });
+
+
+      $(function () {
+        var chart5;
+        $(document).ready(function() {
+
+          // Radialize the colors
+          Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function(color) {
+            return {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+              [0, color],
+              [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+              ]
+            };
+          });
+
+          // Build the chart
+          chart5 = new Highcharts.Chart({
+            chart: {
+              renderTo: 'chart5',
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              width: 1100,
+              height: 600
+            },
+            title: {
+              text: ''
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>${point.y}</b>',
+              percentageDecimals: 1
+            },
+            plotOptions: {
+              pie: {
+                animation: false,
+                shadow: false,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                  enabled: true,
+                  color: '#000000',
+                  connectorColor: '#000000',
+                  formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: $'+ this.y + ' ('+Math.round(this.percentage)+'%)';
+                  }
+                }
+              }
+            },
+            series: [{
+              type: 'pie',
+              name: 'Spending',
+              data: <%=raw ad_group_data[:costs]%>
+            }]
+          });
+        });
+
+      });
+
+
+      $(function () {
+        var chart6;
+        $(document).ready(function() {
+
+          // Radialize the colors
+          Highcharts.getOptions().colors2 = $.map(Highcharts.getOptions().colors, function(color) {
+            return {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+              [0, color],
+              [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+              ]
+            };
+          });
+
+          // Build the chart
+          chart6 = new Highcharts.Chart({
+            chart: {
+              renderTo: 'chart6',
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              width: 1100,
+              height: 600
+            },
+            title: {
+              text: ''
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>${point.y}</b>',
+              percentageDecimals: 1
+            },
+            plotOptions: {
+              pie: {
+                animation: false,
+                shadow: false,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                  enabled: true,
+                  color: '#000000',
+                  connectorColor: '#000000',
+                  formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: '+ this.y + ' ('+Math.round(this.percentage)+'%)';
+                  }
+                }
+              }
+            },
+            series: [{
+              type: 'pie',
+              name: 'Spending',
+              data: <%=raw ad_group_data[:clicks]%>
+            }]
+          });
+        });
+
+      });
+
+
+      $(function () {
+        var chart7;
+        $(document).ready(function() {
+
+          // Radialize the colors
+          Highcharts.getOptions().colors3 = $.map(Highcharts.getOptions().colors, function(color) {
+            return {
+              radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+              stops: [
+              [0, color],
+              [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+              ]
+            };
+          });
+
+          // Build the chart
+          chart7 = new Highcharts.Chart({
+            chart: {
+              renderTo: 'chart7',
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              width: 1100,
+              height: 600
+            },
+            title: {
+              text: ''
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>${point.y}</b>',
+              percentageDecimals: 1
+            },
+            plotOptions: {
+              pie: {
+                animation: false,
+                shadow: false,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                  enabled: true,
+                  color: '#000000',
+                  connectorColor: '#000000',
+                  formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: '+ this.y + ' ('+Math.round(this.percentage)+'%)';
+                  }
+                }
+              }
+            },
+            series: [{
+              type: 'pie',
+              name: 'Spending',
+              data: <%=raw ad_group_data[:conversions]%>
+            }]
+          });
+        });
+
+      });
+    </script>
