@@ -1,4 +1,9 @@
 Lesr::Application.routes.draw do
+  resources :agencies
+
+
+  resources :datas
+
   get "reports/:account_group_id" => "reports#show", as: "report"
   resources :account_groups
   root to: "account_groups#index"
@@ -8,6 +13,8 @@ Lesr::Application.routes.draw do
 
   get "set_month/:month/:year" => "reports#set_month"
   post "reports/send_emails" => "reports#send_emails", as: "send_emails"
+  mount Resque::Server.new, :at => "/resque"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

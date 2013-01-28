@@ -6,7 +6,7 @@ Total Cost: <%=number_to_currency stats[:c][0]%> - <%=stats[:c][2]%>  last month
 Cost per Click: <%=number_to_currency stats[:cpc][0]%> - <%=stats[:cpc][2]%> last month (<%=number_to_currency stats[:cpc][1]%>)<br>
 Cost per Sale: <%=number_to_currency stats[:cps][0]%> - <%=stats[:cps][2]%> last month (<%=number_to_currency stats[:cps][1]%>)<br>
 <br>
-Top Traffic Producers:<br>
+<h5>Top Traffic Producers:</h5>
 <ol>
   <% @account_group.top_traffic_stats(@session["date"], "Google").each do |x| %>
     <li>"<%=x[0]%>" - Clicks: <%=x[1]%> (<%=x[2]%>%)
@@ -14,28 +14,38 @@ Top Traffic Producers:<br>
     </li>
   <% end %>
 </ol>
-Top Sale Producers:<br> 
+
+<h5>Top Sale Producers:</h5>
+<% data = @account_group.top_sales_stats(@session["date"], "Google") %>
+<%="There is no available data" if data == []%>
 <ol>
-  <% @account_group.top_sales_stats(@session["date"], "Google").each do |x| %>
+  <% data.each do |x| %>
     <li>"<%=x[0]%>" - Sales: <%=x[1]%> (<%=x[2]%>%)
       Cost per Sale: <%=number_to_currency x[3]%> Avg. Rank: <%=x[4]%>
     </li>
   <% end %>
 </ol>
-Lowest Cost per Sale:<br> 
+
+<h5>Lowest Cost per Sale:</h5>
+<% data = @account_group.best_cps_stats(@session["date"], "Google") %>
+<%="There is no available data" if data == []%>
 <ol>
-  <% @account_group.best_cps_stats(@session["date"], "Google").each do |x| %>
+  <% data.each do |x| %>
     <li>"<%=x[0]%>" - Sales: <%=x[1]%> (<%=x[2]%>%)
       Cost per Sale: <%=number_to_currency x[3]%> Avg. Rank: <%=x[4]%>
     </li>
   <% end %>
 </ol>
-Least Effective Terms:<br> 
+
+<h5>Least Effective Terms:</h5> 
+<% data = @account_group.worst_cps_stats(@session["date"], "Google") %>
+<%="There is no available data" if data == []%>
 <ol>
-  <% @account_group.worst_cps_stats(@session["date"], "Google").each do |x| %>
+  <% data.each do |x| %>
     <li>"<%=x[0]%>" - Sales: <%=x[1]%> (<%=x[2]%>%)
       Cost: <%=number_to_currency x[3]%> (<%=x[4]%>%)
       Cost per Sale: <%=number_to_currency x[5]%>
     </li>
   <% end %>
 </ol>
+<hr>

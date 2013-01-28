@@ -1,13 +1,4 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="/">Smart SEM</a>
-      <ul class="nav">
-        <li class="active"><a href="http://www.eyehanddesign.com/SmartSEM/index.html">Reporting</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+<%=render "layouts/nav" %>
 
 <div class="container">
 
@@ -64,7 +55,7 @@
             </td>
             <td><%=group.agency.try(:name) || "N/A"%></td>
             <td><%=group.conversion_type%></td>
-            <td>12/12/12 9:00PM</td>
+            <td><%=l group.last_emailed_at, format: :short%></td>
             <td>
               <div class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Select Action<b class="caret"></b></a>

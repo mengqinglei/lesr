@@ -1,0 +1,15 @@
+<%=render "layouts/nav" %>
+<div class="container">
+  <%=render "layouts/flash_message" %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @agency.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_agency_path(@agency) %> |
+<%= link_to 'Back', agencies_path %>
+</div>

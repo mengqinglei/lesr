@@ -1,10 +1,11 @@
-  <h2 id="summary-data">Walters Golf - October 2012 Summary Data</h2>
+<h2 id="summary-data"><%=@account_group.name%> - <%=@session["month_in_word"]%> <%=@session["year"]%> Summary Data</h2>
   <table class="table table-striped table-bordered" style="font-size: 12px;">
     <thead>
       <tr>
         <th>Year</th>
         <th>Month</th>
         <th>Spending</th>
+        <th>Click</th>
         <th>Visits</th>
         <th>CPC</th>
         <th>Total Sales</th>
@@ -12,6 +13,17 @@
       </tr>
     </thead>
     <tbody>
-<tr><td>2012</td><td>October</td><td>22148.61</td><td>17861</td><td>1.24005430826941</td><td>120</td><td>184.57175</td></tr>
+      <% @account_group.summary_data_over_time(@session["date"]).each do |data|%>
+      <tr>
+        <td><%=data[:year]%></td>
+        <td><%=data[:month]%></td>
+        <td><%=number_to_currency data[:cost]%></td>
+        <td><%=number_with_delimiter data[:click]%></td>
+        <td><%=number_with_delimiter data[:impression]%></td>
+        <td><%=number_to_currency data[:cpc]%></td>
+        <td><%=data[:conversion]%></td>
+        <td><%=number_to_currency data[:cps]%></td>
+      </tr>
+    <% end %>
     </tbody>
   </table>

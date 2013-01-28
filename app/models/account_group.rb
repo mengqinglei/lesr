@@ -39,25 +39,7 @@ EOS
   end
 
   def overall_stats(month, vendor)
-    month = Date.parse(month) if month.is_a? String
-    v = self.keyword_stats.where(period: month, vendor: vendor).sum(:click)
-    s = self.keyword_stats.where(period: month, vendor: vendor).sum(:conversion)
-    c =self.keyword_stats.where(period: month, vendor: vendor).sum(:cost)
-    cpc = c.to_f/v
-    cps = c.to_f/s
-
-    last_month = month - 1.month
-    lv = self.keyword_stats.where(period: last_month, vendor: vendor).sum(:click)
-    ls = self.keyword_stats.where(period: last_month, vendor: vendor).sum(:conversion)
-    lc =self.keyword_stats.where(period: last_month, vendor: vendor).sum(:cost)
-    lcpc = lv == 0 ? 0 : lc.to_f/lv
-    lcps = lv ==0 ? 0 : lc.to_f/ls
-
-    {v: [v,lv,compare(v,lv)],
-     s: [s,ls,compare(s,ls)],
-     c: [c,lc,compare(c,lc)],
-     cpc: [cpc,lcpc,compare(cpc,lcpc)],
-     cps: [cps,lcps,compare(cps,lcps)]}
+    KeywordStat.overall_stats(self.id, month, vendor)
   end
 
   def top_traffic_stats(month, vendor)
@@ -156,23 +138,11 @@ EOS
   end
 
   def top_keywords(month, vendor)
-    lines = KeywordStat.where(account_group_id: self.id, period: month, vendor: vendor).select("name, sum(conversion) as conversion, sum(impression) as impression, sum(click) as click, sum(cost) as cost, avg(position) as position").group("name").order("impression DESC").limit(47).map do |x|
-      cpc = 0 if x.click == 0
-      cps = 0 if x.conversion == 0
-      [x.name, x.click, x.impression, (100 * x.click.to_f/x.impression).round(2), cpc || x.cost.to_f/x.click,x.cost,x.position, x.conversion, cps || x.cost.to_f/x.conversion]
-    end
-    sum = KeywordStat.where(account_group_id: self.id, period: month, vendor: vendor).select("sum(conversion) as conversion, sum(impression) as impression, sum(click) as click, sum(cost) as cost, avg(position) as position").first
-    cpc = 0 if sum.click == 0
-    cps = 0 if sum.conversion ==0
-    y = [sum.click, sum.impression, (100* sum.click.to_f/sum.impression).round(2),
-      cpc|| sum.cost/sum.click, sum.cost, sum.position.round(2), sum.conversion,
-      cps || sum.cost/sum.conversion]
-    [lines, y]
-
+    KeywordStat.top_keywords(self.id, month, vendor)
   end
 
   def two_line_data(month, number = 12)
-    base_data = DomainStat.where(account_group_id: self.id, period: month)
+    base_data = KeywordStat.where(account_group_id: self.id, period: month)
 
     months = base_data.select("period as date").group("period").order("date").limit(number).map(&:date).map{|x| Date.parse(x).strftime("%b %y")}
 
@@ -195,7 +165,7 @@ EOS
   end
 
   def ad_group_data(month)
-    base_data = DomainStat.where(account_group_id: self.id, period: month)
+    base_data = KeywordStat.where(account_group_id: self.id, period: month)
 
     costs = base_data.select("ad_group_id as ad_group_id, sum(cost) as cost").group("ad_group_id").order("cost DESC").map{|x| [AdGroup.find(x.ad_group_id).name, x.cost]}
 
@@ -206,6 +176,36 @@ EOS
     {costs: costs, clicks: clicks, conversions: conversions }
   end
 
+  def ad_group_summary(month)
+    base_data = KeywordStat.where(account_group_id: self.id, period: month)
+    data = base_data.select("ad_group_id as ad_group_id, sum(click) as click, sum(impression) as impression, sum(cost) as cost, avg(position) as position, sum(conversion) as conversion").group("ad_group_id").order("click DESC").limit(15).map do |x|
+      [AdGroup.find(x.ad_group_id).name,
+        x.click,
+        x.cost,
+        x.cost.to_f/x.click.to_i,
+        x.impression,
+        x.click*100/x.impression.to_f,
+        x.position,
+        x.conversion,
+        x.conversion.to_f*100/x.click.to_i,
+        x.cost.to_f/x.conversion
+      ]
+    end
+    total = array_add(data)
+    total[3] = total[2].to_f/total[1].to_i rescue 0
+    total[5] = total[1]*100/total[4].to_f rescue 0
+    total[8] = total[7].to_f*100/total[1].to_i rescue 0
+    total[9] = total[2].to_f/total[7] rescue 0
+    [data, total]
+  end
+
+  def array_add(array_of_arrays)
+    n = array_of_arrays[0].try(:size) || 0
+    (0..n-1).map do |index|
+      array_of_arrays.map{|x| x[index] || 0}.inject(&:+)
+    end
+  end
+
   def history_data(month)
     base_data = KeywordStat.where(account_group_id: self.id)
     data = base_data.select("period as date, sum(cost) as cost").
@@ -213,18 +213,16 @@ EOS
 
   end
 
-  private
-
-  def compare(a, b)
-    result = (100 * a/b - 100).to_i
-    if result > 5
-      "#{result}% higher than"
-    elsif result < - 5
-      "#{-result}% lower than"
-    else
-      "Almost the same as"
-    end
-  rescue
-    ""
+  def content_targeting_data(month)
+    DomainStat.content_targeting_data(self.id, month)
   end
+
+  def ad_copy_performance_data(month)
+    AdStat.ad_copy_performance_data(self.id, month)
+  end
+
+  def summary_data_over_time(month)
+    KeywordStat.summary_data_over_time(self.id, month)
+  end
+
 end

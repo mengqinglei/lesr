@@ -9,6 +9,9 @@ class ReportsController < ApplicationController
                disable_javascript: false,
                layout: 'pdf.html',
                disable_smart_shrinking: true,
+               :lowquality => true,
+               :greyscale => true,
+               :no_background => true
       end
     end
   end
@@ -22,8 +25,8 @@ class ReportsController < ApplicationController
   end
 
   def send_emails
-    params["account_groups"].each do |id|
-      EmailReportWorker.perform [id, session]
+    (params["account_groups"] || []).each do |id|
+      Resque.enqueue(EmailReportWorker, [id, session])
     end
     flash[:success] = "Emails are being sent. Please check back in a couple minutes."
     redirect_to :back

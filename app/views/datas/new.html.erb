@@ -1,0 +1,98 @@
+<%=render "layouts/nav" %>
+<div class="container">
+  <%=render "layouts/flash_message" %>
+
+  <h2>Import Google Monthly Data by CSV</h2>
+  <%=form_tag datas_path, { multipart: true} do %>
+    <table>
+      <tr>
+        <td width=200>
+          <%=label_tag :automatic_domain_data %>
+        </td>
+        <td width=400>
+          <% if AutomaticDomainStat.last %>
+            <% last_date = AutomaticDomainStat.last.period%>
+            Lastest:<%=last_date.strftime("%b %Y")%>
+            ( <%=AutomaticDomainStat.where(period: last_date).count("account_id", distinct: true)%> accounts )
+          <% end %>
+        </td>
+        <td width=400>
+          <%=file_field_tag :automatic_domain_data %>
+        </td>
+      </tr>
+      <tr>
+        <td width=200>
+          <%=label_tag :managed_domain_data %>
+        </td>
+        <td width=400>
+          <% if ManagedDomainStat.last %>
+            <% last_date = ManagedDomainStat.last.period%>
+            Lastest:<%=last_date.strftime("%b %Y")%>
+            ( <%=ManagedDomainStat.where(period: last_date).count("account_id", distinct: true)%> accounts )
+          <% end %>
+        </td>
+        <td width=400>
+          <%=file_field_tag :managed_domain_data %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%=label_tag :keyword_data, "Keyword Data"%>
+        </td>
+        <td width=400>
+          <% if KeywordStat.last %>
+            <% last_date = KeywordStat.google.last.period %>
+            Lastest:<%=last_date.strftime("%b %Y") %>
+            ( <%=KeywordStat.google.where(period: last_date).count("account_id", distinct: true)%> accounts )
+          <% end %>
+        </td>
+        <td>
+          <%=file_field_tag :keyword_data %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%=label_tag :ad_data, "Ad Data"%>
+        </td>
+        <td width=400>
+          <% if AdStat.last %>
+            <% last_date = AdStat.last.period%>
+            Lastest:<%=last_date.strftime("%b %Y")%>
+            ( <%=AdStat.where(period: last_date).count("account_id", distinct: true)%> accounts )
+          <% end %>
+        </td>
+        <td>
+          <%=file_field_tag :ad_data %>
+        </td>
+      </tr>
+    </table>
+    <%=submit_tag "Upload", class: "btn btn-primary"%>
+  <% end %>
+
+  <h2>Import Bing Monthly Keyword Data by CSV</h2>
+  <% if KeywordStat.bing.last %>
+    <% last_date = KeywordStat.bing.last.period %>
+    Lastest:<%=last_date.strftime("%b %Y") %>
+    (<%=KeywordStat.bing.where(period: last_date).count("account_id", distinct: true)%> accounts)
+  <% end %>
+  <%=form_tag datas_path, { multipart: true} do %>
+    <table>
+      <tr>
+        <td width=200>
+          <%=label_tag :bing_keyword_data %>
+        </td>
+        <td width=400>
+          <% if KeywordStat.bing.last %>
+            <% last_date = KeywordStat.bing.last.period%>
+            Lastest:<%=last_date.strftime("%b %Y")%>
+            ( <%=KeywordStat.bing.where(period: last_date).count("account_id", distinct: true)%> accounts )
+          <% end %>
+        </td>
+        <td width=400>
+          <%=file_field_tag :bing_keyword_data %>
+        </td>
+      </tr>
+    </table>
+    <%=submit_tag "Upload", class: "btn btn-primary"%>
+  <% end %>
+</div>

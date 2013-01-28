@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106084904) do
+ActiveRecord::Schema.define(:version => 20130127081236) do
 
   create_table "account_groups", :force => true do |t|
     t.string   "name"
@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(:version => 20130106084904) do
     t.string   "conversion_type"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.string   "type"
     t.string   "separator"
     t.text     "email_setting"
     t.text     "custom_email_text"
+    t.datetime "last_emailed_at"
   end
 
   create_table "accounts", :force => true do |t|
@@ -44,17 +44,17 @@ ActiveRecord::Schema.define(:version => 20130106084904) do
 
   create_table "ad_stats", :force => true do |t|
     t.date     "period"
-    t.integer  "impression"
-    t.integer  "click"
-    t.float    "cost"
-    t.integer  "conversion"
+    t.integer  "impression",       :default => 0
+    t.integer  "click",            :default => 0
+    t.float    "cost",             :default => 0.0
+    t.integer  "conversion",       :default => 0
     t.integer  "ad_id"
     t.integer  "ad_group_id"
     t.integer  "campaign_id"
     t.integer  "account_id"
     t.integer  "account_group_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "ads", :force => true do |t|
@@ -89,33 +89,42 @@ ActiveRecord::Schema.define(:version => 20130106084904) do
   create_table "domain_stats", :force => true do |t|
     t.date     "period"
     t.string   "name"
-    t.integer  "impression"
-    t.integer  "click"
-    t.float    "cost"
-    t.integer  "conversion"
+    t.integer  "impression",       :default => 0
+    t.integer  "click",            :default => 0
+    t.float    "cost",             :default => 0.0
+    t.integer  "conversion",       :default => 0
     t.integer  "ad_group_id"
     t.integer  "campaign_id"
     t.integer  "account_id"
     t.integer  "account_group_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "type"
   end
 
   create_table "keyword_stats", :force => true do |t|
     t.date     "period"
     t.string   "name"
-    t.integer  "impression"
-    t.integer  "click"
-    t.float    "cost"
-    t.integer  "conversion"
-    t.float    "position"
+    t.integer  "impression",       :default => 0
+    t.integer  "click",            :default => 0
+    t.float    "cost",             :default => 0.0
+    t.integer  "conversion",       :default => 0
+    t.float    "position",         :default => 0.0
     t.integer  "ad_group_id"
     t.integer  "campaign_id"
     t.integer  "account_id"
     t.integer  "account_group_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "vendor"
+  end
+
+  create_table "uploads", :force => true do |t|
+    t.binary   "data"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "upload_type"
+    t.datetime "processed_at"
   end
 
 end

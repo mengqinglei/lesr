@@ -1,34 +1,45 @@
 <h4>Microsoft Highlights</h4>
 <% stats = @account_group.overall_stats(@session["date"], "Bing") %>
-Total Visits: <%=stats[:v][0]%> - <%=stats[:v][2]%> last month (<%=stats[:v][1]%>)<br>
-Total Cost: <%=number_to_currency stats[:c][0]%> - <%=stats[:c][2]%>  last month (<%=number_to_currency stats[:c][1]%>)<br>
-Cost per Click: <%=number_to_currency stats[:cpc][0]%> - <%=stats[:cpc][2]%> last month (<%=number_to_currency stats[:cpc][1]%>)<br>
-<br>
-Top Traffic Producers:<br>
-<ol>
-  <% @account_group.top_traffic_stats(@session["date"], "Bing").each do |x| %>
-    <li>"<%=x[0]%>" - Clicks: <%=x[1]%> (<%=x[2]%>%)
-      Cost: <%=number_to_currency x[3]%> (<%=x[4]%>%) Avg. Rank: <%=x[5]%>
-    </li>
-  <% end %>
-</ol>
+<% if stats[:v][0] != 0 %>
+  Total Visits: <%=stats[:v][0]%> - <%=stats[:v][2]%> last month (<%=stats[:v][1]%>)<br>
+  Total Cost: <%=number_to_currency stats[:c][0]%> - <%=stats[:c][2]%>  last month (<%=number_to_currency stats[:c][1]%>)<br>
+  Cost per Click: <%=number_to_currency stats[:cpc][0]%> - <%=stats[:cpc][2]%> last month (<%=number_to_currency stats[:cpc][1]%>)<br>
 
-Most Cost Effective Terms:<br> 
-<ol>
-  <% @account_group.best_cpc_stats(@session["date"], "Bing").each do |x| %>
-    <li>"<%=x[0]%>" - Clicks: <%=x[1]%> (<%=x[2]%>%)
-      Cost per Click: <%=number_to_currency x[3]%> Avg. Rank: <%=x[4]%>
-    </li>
-  <% end %>
-</ol>
+  <h5>Top Traffic Producers:</h5>
+  <% data = @account_group.top_traffic_stats(@session["date"], "Bing") %>
+  <%="There is no available data" if data == []%>
+  <ol>
+    <% data.each do |x| %>
+      <li>"<%=x[0]%>" - Clicks: <%=x[1]%> (<%=x[2]%>%)
+        Cost: <%=number_to_currency x[3]%> (<%=x[4]%>%) Avg. Rank: <%=x[5]%>
+      </li>
+    <% end %>
+  </ol>
+
+  <h5>Most Cost Effective Terms:</h5> 
+    <% data = @account_group.best_cpc_stats(@session["date"], "Bing") %>
+  <%="There is no available data" if data == []%>
+  <ol>
+    <% data.each do |x| %>
+      <li>"<%=x[0]%>" - Clicks: <%=x[1]%> (<%=x[2]%>%)
+        Cost per Click: <%=number_to_currency x[3]%> Avg. Rank: <%=x[4]%>
+      </li>
+    <% end %>
+  </ol>
 
 
-Most Expensive Terms:<br> 
-<ol>
-  <% @account_group.worst_cpc_stats(@session["date"], "Bing").each do |x| %>
-    <li>"<%=x[0]%>" - Sales: <%=x[1]%> (<%=x[2]%>%)
-      Cost: <%=number_to_currency x[3]%> (<%=x[4]%>%)
-      Cost per Click: <%=number_to_currency x[5]%>
-    </li>
-  <% end %>
-</ol>
+  <h5>Most Expensive Terms:</h5> 
+    <% data = @account_group.worst_cpc_stats(@session["date"], "Bing") %>
+  <%="There is no available data" if data == []%>
+  <ol>
+    <% data.each do |x| %>
+      <li>"<%=x[0]%>" - Sales: <%=x[1]%> (<%=x[2]%>%)
+        Cost: <%=number_to_currency x[3]%> (<%=x[4]%>%)
+        Cost per Click: <%=number_to_currency x[5]%>
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  There is no Bing data for this account group.
+<% end %>
+<hr>

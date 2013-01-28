@@ -1,0 +1,2 @@
+class AutomaticDomainStat < DomainStat
+end

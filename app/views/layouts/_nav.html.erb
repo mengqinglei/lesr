@@ -1,0 +1,12 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">Smart SEM</a>
+      <ul class="nav">
+        <li class=<%=is_active?("account_groups#index")%>><%=link_to "Reporting", account_groups_path %></li>
+        <li class=<%=is_active?("data#*")%>><%=link_to "Import Data", new_data_path %></li>
+        <li class=<%=is_active?("agencies#*")%>><%=link_to "Agencies", agencies_path %></li>
+      </ul>
+    </div>
+  </div>
+</div>

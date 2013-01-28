@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -21,6 +21,11 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+group :production do
+  gem 'wkhtmltopdf-heroku'
+end
+
 gem "wicked_pdf"
 #gem 'sidekiq'
 gem 'resque', :require => "resque/server"

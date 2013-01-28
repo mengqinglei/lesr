@@ -7,6 +7,7 @@ development:
   adapter: postgresql
   database: lesr_dev
   host: localhost
+  encoding: utf8
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -15,8 +16,10 @@ test:
   adapter: postgresql
   database: lesr_test
   host: localhost
+  encoding: utf8
 
 production:
   adapter: postgresql
   database: lesr_production
   host: localhost
+  encoding: utf8

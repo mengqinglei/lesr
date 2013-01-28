@@ -3,11 +3,11 @@ class CreateKeywordStats < ActiveRecord::Migration
     create_table :keyword_stats do |t|
       t.date :period
       t.string :name
-      t.integer :impression
-      t.integer :click
-      t.float :cost
-      t.integer :conversion
-      t.float :position
+      t.integer :impression, default: 0
+      t.integer :click, default: 0
+      t.float :cost, default: 0
+      t.integer :conversion, default: 0
+      t.float :position, default: 0
       t.integer :ad_group_id
       t.integer :campaign_id
       t.integer :account_id

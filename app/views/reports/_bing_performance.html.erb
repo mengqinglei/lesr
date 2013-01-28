@@ -1,4 +1,6 @@
-  <h2 id="microsoft">Walters Golf - October 2012 Microsoft</h2>		
+<% records = @account_group.top_keywords(@session["date"],"Bing")%>
+  <h2 id="microsoft"><%=@account_group.name%> -  <%=@session["month_in_word"]%> <%=@session["year"]%>  Microsoft</h2>	
+<% if records.present? %>
   <table class="table table-striped table-bordered" style="font-size: 12px;">
     <thead>
       <tr>
@@ -8,65 +10,39 @@
         <th>Click Rate</th>	
         <th>CPC</th>	
         <th>Total Cost</th>	
-        <th>Rank</th>
+        <th>Rank</th>	
+        <th>Sales</th>	
+        <th>Sales $$</th>
       </tr>
     </thead>
     <tbody>
-<tr><td>las vegas golf</td><td>210</td><td>11992</td><td>0.0175116744496331</td><td>1.38647619047619</td><td>291.16</td><td>3</td></tr>
-<tr><td>golf in las vegas</td><td>201</td><td>25690</td><td>0.00782405605293889</td><td>2.32358208955224</td><td>467.04</td><td>3</td></tr>
-<tr class="success"><td>las vegas golf courses</td><td>157</td><td>42597</td><td>0.00368570556611968</td><td>1.75745222929936</td><td>275.92</td><td>4</td></tr>
-<tr><td>las vegas golf packages</td><td>147</td><td>21196</td><td>0.00693527080581242</td><td>2.54489795918367</td><td>374.1</td><td>3</td></tr>
-<tr class="success"><td>bali hai golf club</td><td>125</td><td>5851</td><td>0.0213638694240301</td><td>0.75896</td><td>94.87</td><td>2</td></tr>
-<tr><td>golf vegas</td><td>117</td><td>3329</td><td>0.0351456893962151</td><td>1.08547008547009</td><td>127</td><td>2</td></tr>
-<tr class="error"><td>royal links las vegas</td><td>86</td><td>242</td><td>0.355371900826446</td><td>0.0909302325581395</td><td>7.82</td><td>1</td></tr>
-<tr class="error"><td>vegas wedding packages</td><td>77</td><td>4144</td><td>0.0185810810810811</td><td>0.64025974025974</td><td>49.3</td><td>5</td></tr>
-<tr><td>Desert Pines golf club</td><td>74</td><td>2302</td><td>0.0321459600347524</td><td>0.229864864864865</td><td>17.01</td><td>3</td></tr>
-<tr class="error"><td>las vegas golf vacations</td><td>70</td><td>4438</td><td>0.0157728706624606</td><td>2.09442857142857</td><td>146.61</td><td>3</td></tr>
-<tr><td>royal links golf club</td><td>63</td><td>1886</td><td>0.0334040296924708</td><td>0.563015873015873</td><td>35.47</td><td>2</td></tr>
-<tr><td>las vegas golf course</td><td>60</td><td>3465</td><td>0.0173160173160173</td><td>1.46883333333333</td><td>88.13</td><td>1</td></tr>
-<tr><td>sexy caddie girls</td><td>55</td><td>3367</td><td>0.0163350163350163</td><td>0.492545454545455</td><td>27.09</td><td>2</td></tr>
-<tr><td>royal links golf</td><td>54</td><td>533</td><td>0.101313320825516</td><td>0.352037037037037</td><td>19.01</td><td>1</td></tr>
-<tr><td>Desert Pines Las Vegas</td><td>52</td><td>806</td><td>0.0645161290322581</td><td>0.523461538461538</td><td>27.22</td><td>1</td></tr>
-<tr><td>bali hai</td><td>43</td><td>1002</td><td>0.0429141716566866</td><td>0.979302325581395</td><td>42.11</td><td>1</td></tr>
-<tr><td>bali hai golf</td><td>40</td><td>566</td><td>0.0706713780918728</td><td>0.7085</td><td>28.34</td><td>1</td></tr>
-<tr><td>golf courses in las vegas</td><td>39</td><td>979</td><td>0.0398365679264556</td><td>2.0325641025641</td><td>79.27</td><td>2</td></tr>
-<tr><td>walters golf las vegas</td><td>39</td><td>277</td><td>0.140794223826715</td><td>0.589487179487179</td><td>22.99</td><td>1</td></tr>
-<tr><td>Desert Pines golf</td><td>38</td><td>465</td><td>0.0817204301075269</td><td>0.386578947368421</td><td>14.69</td><td>2</td></tr>
-<tr><td>royal american links</td><td>37</td><td>1093</td><td>0.0338517840805123</td><td>0.597297297297297</td><td>22.1</td><td>1</td></tr>
-<tr><td>vegas parties</td><td>36</td><td>2906</td><td>0.012388162422574</td><td>1.54916666666667</td><td>55.77</td><td>2</td></tr>
-<tr><td>Desert Pines golf course</td><td>35</td><td>690</td><td>0.0507246376811594</td><td>0.458571428571429</td><td>16.05</td><td>1</td></tr>
-<tr><td>cili restaurant las vegas</td><td>35</td><td>138</td><td>0.253623188405797</td><td>0.331428571428571</td><td>11.6</td><td>1</td></tr>
-<tr><td>weddings in las vegas</td><td>34</td><td>6856</td><td>0.00495915985997666</td><td>1.02941176470588</td><td>35</td><td>5</td></tr>
-<tr><td>royal american golf links</td><td>34</td><td>120</td><td>0.283333333333333</td><td>0.372941176470588</td><td>12.68</td><td>1</td></tr>
-<tr><td>golf travel packages</td><td>33</td><td>757</td><td>0.0435931307793923</td><td>3.29757575757576</td><td>108.82</td><td>1</td></tr>
-<tr><td>Walters Golf</td><td>33</td><td>620</td><td>0.0532258064516129</td><td>0.488484848484849</td><td>16.12</td><td>1</td></tr>
-<tr><td>vegas golf</td><td>30</td><td>1904</td><td>0.0157563025210084</td><td>1.987</td><td>59.61</td><td>2</td></tr>
-<tr><td>las vegas discount golf</td><td>26</td><td>1925</td><td>0.0135064935064935</td><td>3.47730769230769</td><td>90.41</td><td>4</td></tr>
-<tr><td>golf courses las vegas nevada</td><td>26</td><td>1179</td><td>0.0220525869380831</td><td>4.94307692307692</td><td>128.52</td><td>1</td></tr>
-<tr><td>vegas caddy girls</td><td>25</td><td>960</td><td>0.0260416666666667</td><td>0.454</td><td>11.35</td><td>2</td></tr>
-<tr><td>sexy caddy girls</td><td>24</td><td>2476</td><td>0.00969305331179321</td><td>0.505</td><td>12.12</td><td>3</td></tr>
-<tr><td>royal links</td><td>24</td><td>81</td><td>0.296296296296296</td><td>0.0804166666666667</td><td>1.93</td><td>1</td></tr>
-<tr><td>desert pines golf las vegas</td><td>23</td><td>364</td><td>0.0631868131868132</td><td>0.323913043478261</td><td>7.45</td><td>2</td></tr>
-<tr><td>caddy girls</td><td>22</td><td>1267</td><td>0.0173638516179953</td><td>0.535454545454545</td><td>11.78</td><td>2</td></tr>
-<tr><td>female caddies</td><td>22</td><td>518</td><td>0.0424710424710425</td><td>0.516363636363636</td><td>11.36</td><td>3</td></tr>
-<tr><td>bali hai golf las vegas</td><td>22</td><td>414</td><td>0.0531400966183575</td><td>0.880454545454545</td><td>19.37</td><td>1</td></tr>
-<tr><td>bali hai golf course</td><td>21</td><td>544</td><td>0.0386029411764706</td><td>0.296666666666667</td><td>6.23</td><td>2</td></tr>
-<tr><td>las vegas golf deals</td><td>21</td><td>439</td><td>0.0478359908883827</td><td>2.3352380952381</td><td>49.04</td><td>2</td></tr>
-<tr><td>royal links golf las vegas</td><td>21</td><td>155</td><td>0.135483870967742</td><td>0.352380952380952</td><td>7.4</td><td>2</td></tr>
-<tr><td>las vegas golf package</td><td>20</td><td>878</td><td>0.0227790432801822</td><td>1.466</td><td>29.32</td><td>2</td></tr>
-<tr><td>vegas weddings</td><td>19</td><td>4102</td><td>0.00463188688444661</td><td>0.86</td><td>16.34</td><td>6</td></tr>
-<tr><td>par mates</td><td>19</td><td>318</td><td>0.059748427672956</td><td>0.250526315789474</td><td>4.76</td><td>2</td></tr>
-<tr><td>bali hai golf club in las vegas</td><td>19</td><td>290</td><td>0.0655172413793104</td><td>0.447894736842105</td><td>8.51</td><td>1</td></tr>
-<tr><td>las vegas weddings</td><td>17</td><td>5591</td><td>0.00304060096583795</td><td>0.745882352941176</td><td>12.68</td><td>6</td></tr>
-<tr><td>wedding in vegas</td><td>17</td><td>3258</td><td>0.00521792510742787</td><td>0.698235294117647</td><td>11.87</td><td>5</td></tr>
-<tr><td>royal links golf course</td><td>16</td><td>527</td><td>0.0303605313092979</td><td>0.29625</td><td>4.74</td><td>1</td></tr>
-      <tr><td><b>Monthly Totals</b></td>	 
-      <td><b>3,172</b></td>	 
-      <td><b>255,402</b></td> 	
-      <td><b>1.24%</b></td>	
-      <td><b>$1.29</b></td> 	
-      <td><b>$4,080.47</b></td>	
-      <td><b></b></td>
-    </tr></tbody>
-  </table>	
-  
+      <% records[0].each do |x|%>
+        <tr>
+          <td><%=x[0]%></td>
+          <td><%=x[1]%></td>
+          <td><%=x[2]%></td>
+          <td><%=x[3]%>%</td>
+          <td><%=number_to_currency x[4]%></td>
+          <td><%=number_to_currency x[5]%></td>
+          <td><%=x[6]%></td>
+          <td><%=x[7]%></td>
+          <td><%=number_to_currency x[8]%></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><b>Monthly Totals</b></td>	 
+        <td><b><%=records[1][0]%></b></td> 	 
+        <td><b><%=records[1][1]%></b></td> 	
+        <td><b><%=records[1][2]%>%</b></td>	
+        <td><b><%=number_to_currency records[1][3]%></b></td> 	
+        <td><b><%=number_to_currency records[1][4]%></b></td>		
+        <td><b><%=records[1][5]%></b></td>	
+        <td><b><%=records[1][6]%></b></td>
+        <td><b><%=number_to_currency records[1][7]%></b></td>
+      </tr>
+    </tbody>
+  </table>
+<% else %>
+  There is no availalbe data
+<% end %>
+
