@@ -37,7 +37,7 @@ class GoogleAdDataImporter
             ad_group_id: ad_grp.id,
             campaign_id: cam.id, account_id: acc.id })
       end
-      raw_file.update_attribute :processed_at, Time.now
+      raw_file.destroy
     end
   end
 end

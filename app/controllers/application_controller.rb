@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  if Rails.env.production?
+    http_basic_authenticate_with :name => ENV['USERNAME'], :password => ENV['PASSWORD']
+  end
   protect_from_forgery
   before_filter :set_date
 

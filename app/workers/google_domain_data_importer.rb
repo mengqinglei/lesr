@@ -23,7 +23,7 @@ class GoogleDomainDataImporter
             conversion: conversion.to_i + domain_stat.conversion,
             campaign_id: cam.id, account_id: acc.id })
         end
-        raw_file.update_attribute :processed_at, Time.now
+        raw_file.destroy
       end
 
   end

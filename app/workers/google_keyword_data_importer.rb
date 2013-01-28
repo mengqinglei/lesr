@@ -24,7 +24,7 @@ class GoogleKeywordDataImporter
            conversion: conversion.to_i + keyword_stat.conversion,
            campaign_id: cam.id, account_id: acc.id, position: position.to_f })
        end
-       raw_file.update_attribute :processed_at, Time.now
+       raw_file.destroy
      end
 
   end
