@@ -1,12 +1,12 @@
 class ReportMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "lesr@smartsem.com"
 
   def report_email(account_group, user_session)
     @account_group = account_group
 
     self.instance_variable_set(:@session, user_session) # enable mail() method could render the collect views
     self.instance_variable_set(:@lookup_context, nil) # enable mail() method could render the collect views
-    mail(:to => "legendben@gmail.com",
+    mail(:to => @account_group.email_setting[:to],
          :cc => @account_group.email_setting[:cc],
          :bcc => @account_group.email_setting[:bcc],
          :subject => @account_group.email_setting[:subject],

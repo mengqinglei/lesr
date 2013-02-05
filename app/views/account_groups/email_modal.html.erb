@@ -41,10 +41,14 @@
         <label class="control-label" for="inputEmailBody" style="width: 60px;">Body:</label>
         <div class="controls" style="margin-left: 70px;">
             <textarea id="email" name="account_group[custom_email_text]" rows="8" style="width: 440px;" disabled>
-<%=@account_group.custom_email_text || @account_group.default_email_text %>
+              <% if @account_group.custom_email_text %>
+<%=@account_group.custom_email_text %>
+              <% else %>
+<%=render 'account_groups/default_email_text' %>
+              <% end %>
             </textarea>
             <textarea id="default_email" rows="8" style="width: 440px;display:none;" disabled>
-<%=@account_group.default_email_text %>
+<%=render 'account_groups/default_email_text' %>
             </textarea>
           <%=link_to_function "Use default", "$('#email').val($('#default_email').html());$('#email').attr('name','').attr('disabled',true)", remote: true%>
 

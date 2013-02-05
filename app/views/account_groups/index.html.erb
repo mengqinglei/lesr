@@ -55,7 +55,11 @@
             </td>
             <td><%=group.agency.try(:name) || "N/A"%></td>
             <td><%=group.conversion_type%></td>
-            <td><%=l(group.last_emailed_at, format: :short) if group.last_emailed_at%></td>
+            <td>
+              <%=l(group.last_emailed_at, format: :short) if group.last_emailed_at%>
+              <br>
+              <%="#{time_ago_in_words(group.last_emailed_at)} ago" if group.last_emailed_at%>
+            </td>
             <td>
               <div class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Select Action<b class="caret"></b></a>

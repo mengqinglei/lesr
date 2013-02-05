@@ -55,6 +55,7 @@ class AccountGroupsController < ApplicationController
 
   def email_modal
     @account_group = AccountGroup.find(params[:account_group_id])
+    @session = session
     render layout: false
   end
 

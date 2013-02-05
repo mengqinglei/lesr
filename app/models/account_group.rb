@@ -28,14 +28,6 @@ class AccountGroup < ActiveRecord::Base
   end
 
   def default_email_text
-<<-EOS
-Attached is your monthly report for October 2012. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-Les Reaves,
-555.555.5555
-EOS
   end
 
   def overall_stats(month, vendor)
