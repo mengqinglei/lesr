@@ -22,7 +22,7 @@ end
 gem 'jquery-rails'
 
 group :production do
-  gem 'wkhtmltopdf-heroku'
+  gem 'wkhtmltopdf-heroku', :git => 'git://github.com/camdez/wkhtmltopdf-heroku.git'
 end
 
 gem "wicked_pdf"
