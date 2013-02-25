@@ -69,7 +69,7 @@ module Lesr
       port: 587,
       domain: "gmail.com",
       user_name: Rails.env.production? ? ENV['GMAIL_USERNAME'] : APP_CONFIG["gmail"]["username"],
-      password: Rails.env.production? ENV['GMAIL_PASSWORD'] : APP_CONFIG["gmail"]["password"],
+      password: Rails.env.production? ? ENV['GMAIL_PASSWORD'] : APP_CONFIG["gmail"]["password"],
       authentication: "plain",
       enable_starttls_auto: true,
       :openssl_verify_mode  => 'none'
