@@ -7,6 +7,9 @@ gem 'rails', '3.2.11'
 gem 'pg'
 gem 'thin'
 gem 'paperclip'
+
+gem 'aws-sdk'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
