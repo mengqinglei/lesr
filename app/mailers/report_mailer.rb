@@ -15,12 +15,32 @@ class ReportMailer < ActionMailer::Base
            format.text
            format.pdf do
              attachments['report.pdf'] = WickedPdf.new.pdf_from_string(
-               render_to_string pdf: "results",
+               render_to_string(pdf: "results",
                template: "reports/show.pdf.erb",
-               layout: "pdf.html.erb",
+               layout: "pdf.html.erb"),
                lowquality: true,
                greyscale: true,
-               no_background: true
+               no_background: true,
+               disable_javascript: false,
+               layout: 'pdf.html',
+               :lowquality => true,
+               :margin => {:top                => 15,
+                           :bottom             => 15,
+                           :left               => 10,
+                           :right              => 10},
+               :header => {:left => @account_group.name,
+                           :right => "#{session[:month_in_word]} #{session[:year]}",
+                           :margin => {left: 30},
+                           :spacing => 5,
+                           :font_size => 9
+                          },
+               :footer => {:html => { :template => 'reports/footer.pdf.erb',
+                                      :locals   => { :agency => @account_group.agency }},
+                           :right => "Page [page] of [topage]",
+                           :margin => {left: 30},
+                           :spacing => 5,
+                           :font_size => 9
+                          }
 
              )
            end

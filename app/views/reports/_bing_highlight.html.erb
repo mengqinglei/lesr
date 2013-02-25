@@ -1,4 +1,4 @@
-<h4>Microsoft Highlights</h4>
+<h3>Microsoft Highlights</h3>
 <% stats = @account_group.overall_stats(@session["date"], "Bing") %>
 <% if stats[:v][0] != 0 %>
   Total Visits: <%=stats[:v][0]%> - <%=stats[:v][2]%> last month (<%=stats[:v][1]%>)<br>

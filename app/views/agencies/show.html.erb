@@ -8,7 +8,13 @@
   <b>Name:</b>
   <%= @agency.name %>
 </p>
-
+<p>
+<b>Logo:</b>
+<h5>Big</h5>
+  <p><%=image_tag @agency.logo.url(:medium) %></p>
+<h5>Small</h5>
+  <p><%=image_tag @agency.logo.url(:footer) %></p>
+</p>
 
 <%= link_to 'Edit', edit_agency_path(@agency) %> |
 <%= link_to 'Back', agencies_path %>

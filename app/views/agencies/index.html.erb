@@ -5,23 +5,25 @@
 
 <table>
   <tr>
-    <th>Name</th>
+    <th width=200>Name</th>
+    <th width=300>Logo</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @agencies.each do |agency| %>
-  <tr>
+  <tr style="text-align: center">
     <td><%= agency.name %></td>
-    <td><%= link_to 'Show', agency %></td>
-    <td><%= link_to 'Edit', edit_agency_path(agency) %></td>
-    <td><%= link_to 'Destroy', agency, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%=image_tag agency.logo.url(:footer) %></td>
+    <td><%= link_to 'Show', agency, class: 'btn' %></td>
+    <td><%= link_to 'Edit', edit_agency_path(agency), class: 'btn' %></td>
+    <td><%= link_to 'Destroy', agency, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Agency', new_agency_path %>
+<%= link_to 'New Agency', new_agency_path, class: 'btn' %>
 </div>

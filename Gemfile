@@ -6,7 +6,7 @@ gem 'rails', '3.2.11'
 
 gem 'pg'
 gem 'thin'
-
+gem 'paperclip'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -25,7 +25,7 @@ group :production do
   gem 'wkhtmltopdf-heroku', :git => 'git://github.com/camdez/wkhtmltopdf-heroku.git'
 end
 
-gem "wicked_pdf"
+gem "wicked_pdf", "0.9.4"
 #gem 'sidekiq'
 gem 'resque', :require => "resque/server"
 

@@ -6,6 +6,7 @@
         <li class=<%=is_active?("account_groups#index")%>><%=link_to "Reporting", account_groups_path %></li>
         <li class=<%=is_active?("data#*")%>><%=link_to "Import Data", new_data_path %></li>
         <li class=<%=is_active?("agencies#*")%>><%=link_to "Agencies", agencies_path %></li>
+        <li><%=link_to "Job Status", '/resque', target: "_blank" %></li>
       </ul>
     </div>
   </div>

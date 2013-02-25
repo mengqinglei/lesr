@@ -22,7 +22,7 @@
       </div>&nbsp;&nbsp;
       -->
       Access Data From:&nbsp;&nbsp;
-      <input type="text" id="default_widget" class="mtz-monthpicker-widgetcontainer">
+      <input type="text" id="default_widget" value=<%="#{session['month']}/#{session['year']}"%> class="mtz-monthpicker-widgetcontainer">
       <input type="submit" value="Email Reports" class="btn btn-primary", data-confirm='Are you sure you want to send out the reports?'>
       <div id="flash_message"></div>
       <br>

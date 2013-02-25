@@ -1,12 +1,12 @@
 <h2 id="campaign-summary"><%=@account_group.name%> - <%=@session["month_in_word"]%> <%=@session["year"]%> Campaign Summary</h2>
 <div class="row">
-  <div class="span6">
+  <div class="span12">
     <h4>Monthly Summary Vs. Historical Comparisons</h4>
     <table class="table table-striped table-bordered" style="font-size: 12px;">
       <thead>
         <tr>
           <th>Summary Data</th>
-          <th>October 2012 Stats</th>
+          <th><%="#{@session["month_in_word"]} #{@session["year"]}" %> Stats</th>
           <th>Historical Average</th>
           <th>Historical Record High</th>
           <th>Historical Record Low</th>	
@@ -28,14 +28,14 @@
           <td>10</td>	
         </tr>
         <tr>
-          <td><b>2012</b></td>	
+          <td><b>Average CPC</b></td>	
           <td>178,760</td>	
           <td>$174,362.05</td> 	
           <td>$0.98</td> 	
           <td>10</td>	
         </tr>
         <tr>
-          <td><b>2012</b></td>	
+          <td><b>Conversions</b></td>	
           <td>178,760</td>	
           <td>$174,362.05</td> 	
           <td>$0.98</td> 	
@@ -44,47 +44,34 @@
       </tbody>	
     </table>	
   </div>
-  <div class="span6">
-    <h4>Monthly Summary Vs. Historical Comparisons</h4>
+
+  <div class="span12">
+    <h4>Monthly Summary Data per Vendor</h4>
     <table class="table table-striped table-bordered" style="font-size: 12px;">
       <thead>
         <tr>
-          <th>Summary Data</th>
-          <th>October 2012 Stats</th>
-          <th>Historical Average</th>
-          <th>Historical Record High</th>
-          <th>Historical Record Low</th>	
+          <th>Ad Vendor</th>
+          <th>% of Traffic</th>
+          <th>% of Spending</th>
+          <th>% of Conversions</th>
+          <th>Recommended Change</th>	
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><b>Spending</b></td>	
+          <td><b>Google Adwords</b></td>	
           <td>178,760</td>	
           <td>$174,362.05</td> 	
           <td>$0.98</td> 	
           <td>10</td>	
         </tr>	
         <tr>
-          <td><b>Traffic</b></td>	
+          <td><b>Microsoft Bing</b></td>	
           <td>178,760</td>	
           <td>$174,362.05</td> 	
           <td>$0.98</td> 	
           <td>10</td>	
         </tr>
-        <tr>
-          <td><b>2012</b></td>	
-          <td>178,760</td>	
-          <td>$174,362.05</td> 	
-          <td>$0.98</td> 	
-          <td>10</td>	
-        </tr>
-        <tr>
-          <td><b>2012</b></td>	
-          <td>178,760</td>	
-          <td>$174,362.05</td> 	
-          <td>$0.98</td> 	
-          <td>10</td>	
-        </tr>																											
       </tbody>	
     </table>				
   </div>
@@ -105,6 +92,7 @@
       <th>Click Rate</th>	
       <th>Average Cost Per Sale</th>
     </tr>
+
   </thead>
   <tbody>
     <tr>
@@ -161,19 +149,25 @@
     </tr>												
   </tbody>	
 </table>
-<br>
+
+<div class="alwaysbreak"></div>
+
 <h4>Total Clicks Compared to Total Monthly Spending</h4>
-<div id="chart1"></div>
+<div id="chart1" class="chart"></div>
 <br>
 <h4>Cost Per Click Compared to Total Monthly Spending</h4>
-<div id="chart2"></div>
-<br>
+<div id="chart2" class="chart"></div>
+
+<div class="alwaysbreak"></div>
+
 <h4>Conversions Compared to Total Monthly Spending</h4>
-<div id="chart3"></div>
+<div id="chart3" class="chart"></div>
 <br>
 <h4>Cost Per Conversion Compared to Total Monthly Spending</h4>
-<div id="chart4"></div>	
-<br>
+<div id="chart4" class="chart"></div>	
+
+<div class="alwaysbreak"></div>
+
 <h4>Ad Group Summaries</h4>
 <b>Data is broken out by up to 15 top keyword groupings of common terms and combines Google and Yahoo data.</b>
 <table class="table table-striped table-bordered" style="font-size: 12px;">
@@ -238,7 +232,8 @@
     </tr>																																										
   </tbody>	
 </table>
-<br>
+
+<div class="alwaysbreak"></div>
 
 <%@two_line_data = @account_group.two_line_data(@session["date"])%>
 <%@ad_group_data = @account_group.ad_group_data(@session["date"])%>
@@ -247,12 +242,16 @@
 <br>
 <h4>Overall Traffic Generation Percentages per Ad Group</h4>
 <div id="chart6"></div>	
-<br>
+
+<div class="alwaysbreak"></div>
+
 <h4>Overall Conversion Percentages per Ad Group</h4>
 <% unless @ad_group_data[:conversions] == []%>
   <div id="chart7"></div>
 <% else %>
   There is no conversion data for this period
 <% end %>
+
+<div class="alwaysbreak"></div>
 
 <%=render "reports/graphs.html.erb"%>

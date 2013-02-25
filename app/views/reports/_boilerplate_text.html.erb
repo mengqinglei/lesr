@@ -1,18 +1,21 @@
 <h2 id="search-position-report"><%="#{@account_group.name} - #{@session["month_in_word"]} #{@session["year"]}"%> Search Positioning Report</h2>
 
-<h3><em>Organic SEO Revisited</em></h3>
+<h3>Organic SEO Revisited</h3>
 <p>
   We mainly focus on paid search in these reports, however occasionally we advise you on the basics of organic SEO.  Even if you are actively engaged in a professional outsourced SEO program, it's important to have in-house knowledge of how the search algorithms rank your website.  Successful online businesses realize that paid search provides reliable, proven, immediate traffic for marketers; while unpaid organic search should be thought of as bonus traffic.  That's not to say that organic search can't provide more traffic and business than paid search traffic; often times it does.  But paid search isn't affected by the random whims of a computer generated ranking system and is a marketing vehicle that can be trusted.  We've encountered many businesses over the years that had built their businesses on aggressive organic search strategies, only to find their business dry up after a significant Google algorithm change.
   <br><br>
   In fact, there were more significant changes made to Google's search algorithm in 2012 than in recent memory.  With internal names like Penguin and Panda, Google's algorithm changes mainly went after aggressive link builders and aggressive bloggers; two cheap SEO tricks that had worked great for organic SEO for the past few years.  So, if anything, Google brought SEO back to the basics in 2012.
 </p>
-<h3><em>The Do's</em></h3>
+<h3>The Do's of Organic SEO</h3>
 <ol>
   <li>Always write useful and unique content with human readers in mind, not a search algorithm, and always stay on topic.</li>
   <li>Write 5-6 word page (Meta) titles that accurately summarize the content on the page and also make sure to include all of the words in your title in the copy on the page.  This is a tedious task, but possibly the most important single thing that you can do to improve your SEO rankings.</li>
   <li>Study both Analytics and AdWords conversion results to pick out your top 10-20 most important keyword phrases.  Within AdWords we have conversion data and within Analytics we can study 'bounce rates', 'time on the site' and 'number of pages viewed' per keyword in order to figure out which keywords you should focus your organic search efforts on.  We can help you.</li>
   <li>Build an SEO friendly internal link structure.  The optimal link structure of a site looks like a pyramid, so that the home page links to a series of sub-pages that then link to more detailed pages, etc.  Never hide pages of your site outside of this structure and always include a sitemap.<br>
-  <%= request.try(:format) == :html ? image_tag("sitemap.png") : wicked_pdf_image_tag("sitemap.png")%><br>&nbsp;<br></li>
+  <div style="text-align: center">
+    <%= request.try(:format) == :html ? image_tag("sitemap.png") : wicked_pdf_image_tag("sitemap.png")%><br>&nbsp;<br></div>
+    
+    </li>
   <li>Fast page load times are important to your customers, but also important to Google ranking.</li>
   <li>Link to .org and .gov websites whenever you can, but avoid linking to websites solely for SEO purposes.  Linkage programs used to be the hottest strategy in SEO circles, but as of 2012 link building programs are being targeted by search algorithms as Spam.</li>
   <li>Consolidate all of your information on just one domain., having your content on multiple domain names hurts your ranking.  If you own multiple domains, consider dropping them.</li>
@@ -20,7 +23,7 @@
   <li>Update your site regularly.  The use of calendars, weather bugs, blogging and regular content updates is proven to increase search algorithm visitation.</li>  
   <li>Citations - Make sure that your business is listed in as many business citations websites as possible (Citysearch, Yelp, Yahoo Local, Google Places etc.)  Also make sure that the address in each of these citations is exactly the same, down to the use of abbreviations like St. vs. Street.</li>
 </ol>
-<h3><em>The Dont's of Organic SEO</em></h3>
+<h3>The Dont's of Organic SEO</h3>
 <ol>
   <li>Don't deceive users with content that doesn't match the true theme of the page.</li>
   <li>Don't try to deceive the algorithms; the famous early example of this was to write text in the same color as the background so that users couldn't see the words but the algorithms would.  Today this includes sneaky redirects, cloaking and hidden links.</li>

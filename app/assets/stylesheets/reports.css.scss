@@ -2,3 +2,17 @@ h2{
   padding-top: 40px;
   margin-top: -40px;
 }
+
+.alwaysbreak { page-break-after: always; }
+.nobreak:before { clear:both; }
+.nobreak{ page-break-inside: avoid;
+  /* http://code.google.com/p/wkhtmltopdf/issues/detail?id=9#c21 */
+}
+
+.chart{
+  width: 900px;
+  text-align: center;
+  .highcharts-container{
+    text-align: center;
+  }
+}
