@@ -29,7 +29,7 @@ class ReportMailer < ActionMailer::Base
                            :left               => 10,
                            :right              => 10},
                :header => {:left => @account_group.name,
-                           :right => "#{session[:month_in_word]} #{session[:year]}",
+                           :right => "#{@session[:month_in_word]} #{@session[:year]}",
                            :margin => {left: 30},
                            :spacing => 5,
                            :font_size => 9

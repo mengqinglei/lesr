@@ -17,10 +17,10 @@ class GoogleDomainDataImporter
 
           domain_stat = eval(raw_file.upload_type).where(name: domain, period: period, ad_group_id: ad_grp.id).first_or_create
           domain_stat.update_attributes({
-            impression: impression.to_i + domain_stat.impression,
-            click: click.to_i + domain_stat.click,
-            cost: cost.to_f + domain_stat.cost,
-            conversion: conversion.to_i + domain_stat.conversion,
+            impression: impression.to_i,
+            click: click.to_i,
+            cost: cost.to_f,
+            conversion: conversion.to_i,
             campaign_id: cam.id, account_id: acc.id })
         end
         raw_file.destroy
