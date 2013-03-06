@@ -10,3 +10,11 @@
 #default_widget{
   width: 100px;
 }
+
+#flash_message.success{
+  background-color: green;
+}
+
+#flash_message.error{
+  background-color: red;
+}

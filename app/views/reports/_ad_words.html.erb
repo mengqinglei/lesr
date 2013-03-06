@@ -1,43 +1,47 @@
 <h2 id="google-ad-words"><%=@account_group.name%> -  <%=@session["month_in_word"]%> <%=@session["year"]%>  Google AdWords</h2>	
-  <table class="table table-striped table-bordered" style="font-size: 12px;">
-    <tbody>
-      <thead>
+  <% records = @account_group.top_keywords(@session["date"],"Google")%>
+  <% if records[0].present? %>
+    <table class="table table-striped table-bordered" style="font-size: 12px;">
+      <tbody>
+        <thead>
+          <tr>
+            <th>Search Term</th>	
+            <th>Clicks</th>	
+            <th>Impressions</th>	
+            <th>Click Rate</th>	
+            <th>CPC</th>	
+            <th>Total Cost</th>	
+            <th>Rank</th>	
+            <th>Sales</th>	
+            <th>Sales $$</th>
+          </tr>
+        </thead>
+        <% records[0].each do |x|%>
+          <tr>
+            <td><%=x[0]%></td>
+            <td><%=x[1]%></td>
+            <td><%=x[2]%></td>
+            <td><%=x[3]%>%</td>
+            <td><%=number_to_currency x[4]%></td>
+            <td><%=number_to_currency x[5]%></td>
+            <td><%=x[6]%></td>
+            <td><%=x[7]%></td>
+            <td><%=number_to_currency x[8]%></td>
+          </tr>
+        <% end %>
         <tr>
-          <th>Search Term</th>	
-          <th>Clicks</th>	
-          <th>Impressions</th>	
-          <th>Click Rate</th>	
-          <th>CPC</th>	
-          <th>Total Cost</th>	
-          <th>Rank</th>	
-          <th>Sales</th>	
-          <th>Sales $$</th>
+          <td><b>Monthly Totals</b></td>	 
+          <td><b><%=records[1][0]%></b></td> 	 
+          <td><b><%=records[1][1]%></b></td> 	
+          <td><b><%=records[1][2]%>%</b></td>	
+          <td><b><%=number_to_currency records[1][3]%></b></td> 	
+          <td><b><%=number_to_currency records[1][4]%></b></td>		
+          <td><b><%=records[1][5]%></b></td>	
+          <td><b><%=records[1][6]%></b></td>
+          <td><b><%=number_to_currency records[1][7]%></b></td>
         </tr>
-      </thead>
-      <% records = @account_group.top_keywords(@session["date"],"Google")%>
-      <% records[0].each do |x|%>
-        <tr>
-          <td><%=x[0]%></td>
-          <td><%=x[1]%></td>
-          <td><%=x[2]%></td>
-          <td><%=x[3]%>%</td>
-          <td><%=number_to_currency x[4]%></td>
-          <td><%=number_to_currency x[5]%></td>
-          <td><%=x[6]%></td>
-          <td><%=x[7]%></td>
-          <td><%=number_to_currency x[8]%></td>
-        </tr>
-      <% end %>
-      <tr>
-        <td><b>Monthly Totals</b></td>	 
-        <td><b><%=records[1][0]%></b></td> 	 
-        <td><b><%=records[1][1]%></b></td> 	
-        <td><b><%=records[1][2]%>%</b></td>	
-        <td><b><%=number_to_currency records[1][3]%></b></td> 	
-        <td><b><%=number_to_currency records[1][4]%></b></td>		
-        <td><b><%=records[1][5]%></b></td>	
-        <td><b><%=records[1][6]%></b></td>
-        <td><b><%=number_to_currency records[1][7]%></b></td>
-      </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  <% else %>
+    There is no available data from Google.
+  <% end %>

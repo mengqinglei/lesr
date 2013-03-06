@@ -1,6 +1,6 @@
 <% records = @account_group.top_keywords(@session["date"],"Bing")%>
   <h2 id="microsoft"><%=@account_group.name%> -  <%=@session["month_in_word"]%> <%=@session["year"]%>  Microsoft</h2>	
-<% if records.present? %>
+<% if records[0].present? %>
   <table class="table table-striped table-bordered" style="font-size: 12px;">
     <thead>
       <tr>

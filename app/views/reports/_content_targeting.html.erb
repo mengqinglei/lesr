@@ -1,42 +1,46 @@
 <h2 id="google-content"><%=@account_group.name%> - <%=@session["month_in_word"]%> <%=@session["year"]%> Google Content Targeting</h2>	
-  <table class="table table-striped table-bordered" style="font-size: 12px;">
-    <thead>
-      <tr>
-        <th>Domain</th>	
-        <th>Clicks</th>	
-        <th>Impressions</th>	
-        <th>Click Rate</th>	 
-        <th>CPC</th> 	 
-        <th>Total Cost</th> 	 
-        <th>Sales</th> 	 
-        <th>Sales $$</th> 
-      </tr>
-    </thead>
-    <tbody>
-      <% data = @account_group.content_targeting_data(@session["date"])%>
-      <% data[0].each do |line| %>
+  <% data = @account_group.content_targeting_data(@session["date"])%>
+  <% if data[0].present? %>
+    <table class="table table-striped table-bordered" style="font-size: 12px;">
+      <thead>
         <tr>
-          <td><%=line[0]%></td>	 
-          <td><%=line[1]%></td>	 
-          <td><%=number_with_delimiter line[2]%></td> 	
-          <td><%=number_to_percentage line[3], precision: 2%></td>	 
-          <td><%=number_to_currency line[4]%></td> 	 
-          <td><%=number_to_currency line[5]%></td> 	 
-          <td><%=line[6]%></td> 	 
-          <td><%=number_to_currency line[7]%></td> 
+          <th>Domain</th>	
+          <th>Clicks</th>	
+          <th>Impressions</th>	
+          <th>Click Rate</th>	 
+          <th>CPC</th> 	 
+          <th>Total Cost</th> 	 
+          <th>Sales</th> 	 
+          <th>Sales $$</th> 
         </tr>
-      <% end %>
-      <tr>
-        <% line = data[1] %>
-        <td><b>Monthly Totals</b></td>	 
-        <td><b><%=line[0]%></b></td>	 
-        <td><b><%=number_with_delimiter line[1]%></b></td> 	
-        <td><b><%=number_to_percentage line[2], precision: 2%></b></td>	 
-        <td><b><%=number_to_currency line[3]%></b></td> 	 
-        <td><b><%=number_to_currency line[4]%></b></td> 	 
-        <td><b><%=line[5]%></b></td> 	 
-        <td><b><%=number_to_currency line[6]%></b></td> 
-      </tr>										
-    </tbody>
-  </table>		
+      </thead>
+      <tbody>
+        <% data[0].each do |line| %>
+          <tr>
+            <td><%=line[0]%></td>	 
+            <td><%=line[1]%></td>	 
+            <td><%=number_with_delimiter line[2]%></td> 	
+            <td><%=number_to_percentage line[3], precision: 2%></td>	 
+            <td><%=number_to_currency line[4]%></td> 	 
+            <td><%=number_to_currency line[5]%></td> 	 
+            <td><%=line[6]%></td> 	 
+            <td><%=number_to_currency line[7]%></td> 
+          </tr>
+        <% end %>
+        <tr>
+          <% line = data[1] %>
+          <td><b>Monthly Totals</b></td>	 
+          <td><b><%=line[0]%></b></td>	 
+          <td><b><%=number_with_delimiter line[1]%></b></td> 	
+          <td><b><%=number_to_percentage line[2], precision: 2%></b></td>	 
+          <td><b><%=number_to_currency line[3]%></b></td> 	 
+          <td><b><%=number_to_currency line[4]%></b></td> 	 
+          <td><b><%=line[5]%></b></td> 	 
+          <td><b><%=number_to_currency line[6]%></b></td> 
+        </tr>										
+      </tbody>
+    </table>		
+  <% else%>
+    There is no available data from Google.
+  <% end %>
   

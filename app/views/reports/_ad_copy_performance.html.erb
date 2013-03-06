@@ -1,51 +1,56 @@
 <h2 id="google-ad-performance"><%=@account_group.name%> - <%=@session["month_in_word"]%> <%=@session["year"]%> Ad Copy Performance</h2>
-<% @account_group.ad_copy_performance_data(@session["date"]).each do |ad_group| %>
-  <h3>Ad Group - <%=ad_group[0]%></h3>	
-  <table class="table">
-    <tbody>
-      <% ad_group[1].each_with_index do |ad, index|%>
-        <tr>
-          <td class="span1"><h1><%=(index+65).chr%></h1></td>
-          <td>
-            <%=link_to ad[0].headline, ad[0].destination_url, style: "text-decoration: underline" %>
-            <br>
-            <%=ad[0].line1 %>
-            <%=ad[0].line2 %>
-            <br>
-            <b><%=ad[0].display_url %></b>
-          </td>
-          <td>
-            <table class="table table-striped table-bordered">
-              <tbody>
-                <tr>
-                  <td><b>Destination URL: </b></td>
-                  <td colspan="7"><%=ad[0].destination_url%></td>
-                </tr>
-                <tr>
-                  <td rowspan="2"></td>
-                  <td><b>Clicks</b></td>	 
-                  <td><b>Impressions</b></td> 	
-                  <td><b>Click Rate</b></td>	
-                  <td><b>Total Spent</b></td>	
-                  <td><b>Sales</b></td>	
-                  <td><b>Conversion Rate</b></td>	
-                  <td><b>Cost per Sale</b></td>
-                </tr>
-                <tr>
-                  <td><%=ad[1].click%></td>	 
-                  <td><%=ad[1].impression%></td> 	
-                  <td><%=number_to_percentage ad[1].click*100/ad[1].impression.to_f, precision: 2%></td>	
-                  <td><%=number_to_currency ad[1].cost%></td> 	
-                  <td><%=ad[1].conversion%></td> 	
-                  <td><%=number_to_percentage ad[1].conversion*100/ad[1].click.to_f, precision: 2%></td>	
-                  <td><%=number_to_currency ad[1].cost/ad[1].conversion.to_f%></td> 
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-    </table>
-    <div class='alwaysbreak'></div>
-  <%end %>
+<% data = @account_group.ad_copy_performance_data(@session["date"]) %>
+<% if data.present? %>
+  <% data.each do |ad_group| %>
+    <h3>Ad Group - <%=ad_group[0]%></h3>	
+    <table class="table">
+      <tbody>
+        <% ad_group[1].each_with_index do |ad, index|%>
+          <tr>
+            <td class="span1"><h1><%=(index+65).chr%></h1></td>
+            <td>
+              <%=link_to ad[0].headline, ad[0].destination_url, style: "text-decoration: underline" %>
+              <br>
+              <%=ad[0].line1 %>
+              <%=ad[0].line2 %>
+              <br>
+              <b><%=ad[0].display_url %></b>
+            </td>
+            <td>
+              <table class="table table-striped table-bordered">
+                <tbody>
+                  <tr>
+                    <td><b>Destination URL: </b></td>
+                    <td colspan="7"><%=ad[0].destination_url%></td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2"></td>
+                    <td><b>Clicks</b></td>	 
+                    <td><b>Impressions</b></td> 	
+                    <td><b>Click Rate</b></td>	
+                    <td><b>Total Spent</b></td>	
+                    <td><b>Sales</b></td>	
+                    <td><b>Conversion Rate</b></td>	
+                    <td><b>Cost per Sale</b></td>
+                  </tr>
+                  <tr>
+                    <td><%=ad[1].click%></td>	 
+                    <td><%=ad[1].impression%></td> 	
+                    <td><%=number_to_percentage ad[1].click*100/ad[1].impression.to_f, precision: 2%></td>	
+                    <td><%=number_to_currency ad[1].cost%></td> 	
+                    <td><%=ad[1].conversion%></td> 	
+                    <td><%=number_to_percentage ad[1].conversion*100/ad[1].click.to_f, precision: 2%></td>	
+                    <td><%=number_to_currency ad[1].cost/ad[1].conversion.to_f%></td> 
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      </table>
+      <div class='alwaysbreak'></div>
+    <%end %>
+  <% else %>
+    There is no available data from Google.
+  <% end %>

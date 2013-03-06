@@ -50,9 +50,9 @@ class KeywordStat < ActiveRecord::Base
   end
 
   def self.summary_data_over_time(account_group_id, month)
-    base_data = KeywordStat.where(account_group_id: account_group_id, period: month)
+    base_data = KeywordStat.where(account_group_id: account_group_id).where("period <= ?", month)
 
-    base_data.select("period as date, sum(cost) as cost, sum(click) as click, sum(impression) as impression, sum(conversion) as conversion").group("period").order("date").map do |x|
+    base_data.select("period as date, sum(cost) as cost, sum(click) as click, sum(impression) as impression, sum(conversion) as conversion").group("period").order("date desc").map do |x|
       {
        year: x.date.split("-")[0],
        month: Date::MONTHNAMES[x.date.split("-")[1].to_i],

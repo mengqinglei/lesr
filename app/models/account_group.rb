@@ -134,7 +134,7 @@ class AccountGroup < ActiveRecord::Base
   end
 
   def two_line_data(month, number = 12)
-    base_data = KeywordStat.where(account_group_id: self.id, period: month)
+    base_data = KeywordStat.where(account_group_id: self.id).where("period <= ?", month)
 
     months = base_data.select("period as date").group("period").order("date").limit(number).map(&:date).map{|x| Date.parse(x).strftime("%b %y")}
 
@@ -153,7 +153,7 @@ class AccountGroup < ActiveRecord::Base
       group("period").order("date ASC").limit(number).map do |x|
       x.cost/x.conversion
     end
-    {months: months, monthly_spendings: monthly_spendings, clicks: clicks, conversions: conversions, cpcs: cpcs, cpss: cpss}
+    {months: months, monthly_spendings: monthly_spendings, clicks: clicks, conversions: conversions, cpcs: cpcs, cpss: cpss }
   end
 
   def ad_group_data(month)
@@ -183,11 +183,19 @@ class AccountGroup < ActiveRecord::Base
         x.cost.to_f/x.conversion
       ]
     end
+
     total = array_add(data)
     total[3] = total[2].to_f/total[1].to_i rescue 0
     total[5] = total[1]*100/total[4].to_f rescue 0
     total[8] = total[7].to_f*100/total[1].to_i rescue 0
     total[9] = total[2].to_f/total[7] rescue 0
+    total[10] = ""
+
+    data.each{|x| x[-1] = "N/A" if x[-1].infinite?}
+    p good_cps = data.map{|x| x[-1]}.select{|x| x!="N/A"}
+    p average_cps = good_cps.sort[good_cps.count/2]
+    data.map{|x| x.push( recommend(x[-1], average_cps))}
+
     [data, total]
   end
 
@@ -198,11 +206,56 @@ class AccountGroup < ActiveRecord::Base
     end
   end
 
+  def array_percent(array_of_arrays)
+    sum = array_add(array_of_arrays)
+    n = array_of_arrays[0].try(:size) || 0
+    (0..n-1).map do |index|
+      array_of_arrays.map{|x| (x[index]*100.to_f / sum[index]) rescue 0}
+    end
+  end
+
   def history_data(month)
     base_data = KeywordStat.where(account_group_id: self.id)
     data = base_data.select("period as date, sum(cost) as cost").
       group("period").order("date ASC").map(&:cost)
 
+  end
+
+  def historical_records(month)
+    data = two_line_data(month, 1000)
+    {spendings: last_average_high_low(data[:monthly_spendings]),
+     clicks: last_average_high_low(data[:clicks]),
+     cpcs: last_average_high_low(data[:cpcs]),
+     conversions: last_average_high_low(data[:conversions])
+    }
+  end
+
+  def vendor_split(month)
+    base_data = KeywordStat.where(account_group_id: self.id, period: month)
+
+    data = base_data.select("vendor, sum(click) as click, sum(cost) as cost, sum(conversion) as conversion").group("vendor").order("vendor desc").map do |x|
+        [x.vendor, x.click, x.cost, x.conversion]
+    end
+    [data, array_percent(data)]
+  end
+
+  def historical_annuals(month)
+    base_data = KeywordStat.where(account_group_id: id).where("period <= ?", month)
+    annuals = base_data.select("date_part('year',period) as year, count(distinct period) as periods, sum(cost) as cost, sum(click) as click, sum(impression) as impression, sum(conversion) as conversion").group("year").order("year desc").map do |x|
+      {year: x.year, months: x.periods.to_i, impression: x.impression, click: x.click, cost: x.cost, conversion: x.conversion}
+    end
+    total = base_data.select("count(distinct period) as periods, sum(cost) as cost, sum(click) as click, sum(impression) as impression, sum(conversion) as conversion").map do |x|
+      {months: x.periods.to_i, impression: x.impression, click: x.click, cost: x.cost, conversion: x.conversion}
+    end
+    [annuals, total[0]]
+  end
+
+  def last_average_high_low(data)
+    [data[-1],
+      data.sum.to_f/data.count,
+      data.max,
+      data.min
+    ]
   end
 
   def content_targeting_data(month)
@@ -216,5 +269,17 @@ class AccountGroup < ActiveRecord::Base
   def summary_data_over_time(month)
     KeywordStat.summary_data_over_time(self.id, month)
   end
+  private
 
+  def recommend real, benchmark
+    if real == "N/A"
+      "Decrease"
+    elsif real > benchmark * 1.1
+      "Decrease"
+    elsif real < benchmark * 0.9
+      "Increase"
+    else
+      "No change"
+    end
+  end
 end

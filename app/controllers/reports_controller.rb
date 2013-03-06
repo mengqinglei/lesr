@@ -35,7 +35,11 @@ class ReportsController < ApplicationController
     session["year"] = params[:year].to_i
     session["month_in_word"] = Date::MONTHNAMES[session["month"]]
     session["date"] = Date.new(session[:year], session["month"], 1)
-    render json: {message: "Date range updated!"}, status: 200
+    if KeywordStat.where(period: session[:date]).present?
+      render json: {message: "Date range updated!", visual: "success"}, status: 200
+    else
+      render json: {message: "There is no keyword data in selected month", visual: "error"}, status: 200
+    end
   end
 
   def send_emails

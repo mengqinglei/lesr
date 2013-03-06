@@ -6,3 +6,9 @@ $ ->
 
   ($ '#default_widget').monthpicker()
 
+  ($ "input.caller").click ->
+    if $(this).is(':checked')
+      $("input.receiver").attr('checked', true)
+    else
+      $("input.receiver").attr('checked', false)
+

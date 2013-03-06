@@ -1,6 +1,6 @@
-Attached is your monthly report for October 2012. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Attached is your monthly report for <%=@session["month_in_word"]%> <%=@session["year"]%>. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-<%=render 'reports/highlight'%>
+<%=render template: 'reports/_highlight.html.erb'%>
 
 Les Reaves,
 555.555.5555
