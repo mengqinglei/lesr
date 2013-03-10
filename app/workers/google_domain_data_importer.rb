@@ -4,7 +4,6 @@ class GoogleDomainDataImporter
       raw_file = Upload.find(upload_id)
       file = CSV.parse(raw_file.data, quote_char: "`", col_sep: "\t")#.unpack('C*').pack('U*')) #remove non UTF-8 char
       file.pop #Get rid of the total line at the end of file
-      ActiveRecord::Base.transaction do
         print "0"
         file.drop(6).each_with_index do |line, index|
           account, domain, campaign, ad_group,
@@ -35,6 +34,5 @@ class GoogleDomainDataImporter
         end
         raw_file.destroy
       end
-  end
 end
 

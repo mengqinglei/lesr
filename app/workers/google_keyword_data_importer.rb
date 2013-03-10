@@ -7,7 +7,6 @@ class GoogleKeywordDataImporter
      date_string = file.drop(4).take(1)[0].to_s
      period = Upload.get_day(date_string)
 
-     ActiveRecord::Base.transaction do
        file.drop(6).each do |line|
          account, campaign, keyword, ad_group,
            impression, click,_, _, cost, position, conversion, _, _ = line
@@ -25,7 +24,5 @@ class GoogleKeywordDataImporter
            campaign_id: cam.id, account_id: acc.id, position: position.to_f })
        end
        raw_file.destroy
-     end
-
   end
 end

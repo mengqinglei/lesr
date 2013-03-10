@@ -5,7 +5,6 @@ class GoogleAdDataImporter
     raw_file = Upload.find(upload_id)
     file = CSV.parse(raw_file.data, quote_char: "`", col_sep: "\t")#.unpack('C*').pack('U*')) #remove non UTF-8 char
     file.pop #Get rid of the total line at the end of file
-    ActiveRecord::Base.transaction do
       file.drop(6).each do |line|
         account, campaign, ad_group, google_ad_id,
           headline, line1, line2, display_url, destination_url,
@@ -38,6 +37,5 @@ class GoogleAdDataImporter
             campaign_id: cam.id, account_id: acc.id })
       end
       raw_file.destroy
-    end
   end
 end
