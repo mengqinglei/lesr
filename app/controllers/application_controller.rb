@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def set_date
     unless session["date"]
       today = Date.today
-      latest_date = KeywordStat.order("period desc").first.period
+      latest_date = KeywordStat.order("period desc").first.period || Date.new(2012,12,1)
        session["month"] = latest_date.month
        session["year"] = latest_date.year
        session["month_in_word"] = Date::MONTHNAMES[session["month"]]

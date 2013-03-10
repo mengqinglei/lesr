@@ -2,10 +2,10 @@ class GoogleKeywordDataImporter
   @queue = :report_queue
   def self.perform(upload_id)
      raw_file = Upload.find(upload_id)
-     file = CSV.parse(raw_file.data, quote_char: "|", col_sep: "\t")
+     file = CSV.parse(raw_file.data, quote_char: "`", col_sep: "\t")
      file.pop #Get rid of the total line at the end of file
-     date_string = file.drop(4).take(1)[0][1..3].join.split("-")[0]
-     period = Date.parse(date_string)
+     date_string = file.drop(4).take(1)[0].to_s
+     period = Upload.get_day(date_string)
 
      ActiveRecord::Base.transaction do
        file.drop(6).each do |line|

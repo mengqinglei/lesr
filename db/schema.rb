@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225045652) do
+ActiveRecord::Schema.define(:version => 20130310173732) do
 
   create_table "account_groups", :force => true do |t|
     t.string   "name"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20130225045652) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.string   "type"
+    t.integer  "upload_id"
   end
 
   create_table "keyword_stats", :force => true do |t|

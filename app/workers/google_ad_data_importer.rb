@@ -3,14 +3,14 @@ class GoogleAdDataImporter
   @queue = :report_queue
   def self.perform(upload_id)
     raw_file = Upload.find(upload_id)
-    file = CSV.parse(raw_file.data)#.unpack('C*').pack('U*')) #remove non UTF-8 char
+    file = CSV.parse(raw_file.data, quote_char: "`", col_sep: "\t")#.unpack('C*').pack('U*')) #remove non UTF-8 char
     file.pop #Get rid of the total line at the end of file
     ActiveRecord::Base.transaction do
       file.drop(6).each do |line|
         account, campaign, ad_group, google_ad_id,
           headline, line1, line2, display_url, destination_url,
           impression, click, _, _, cost, conversion, _, _ = line
-        period = file.drop(4).take(1)[0][1].split("-")[0].to_date
+        period = Upload.get_day(file.drop(4).take(1)[0].to_s)
 
         acc = Account.where(name: account, vendor: "Google").first_or_create
         cam = Campaign.where(name: campaign, account_id: acc.id).first_or_create

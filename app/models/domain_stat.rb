@@ -1,5 +1,5 @@
 class DomainStat < ActiveRecord::Base
-  attr_accessible :account_group_id, :account_id, :ad_group_id, :campaign_id, :click, :conversion, :cost, :impression, :name, :period, :type
+  attr_accessible :account_group_id, :account_id, :ad_group_id, :campaign_id, :click, :conversion, :cost, :impression, :name, :period, :type, :upload_id
 
   belongs_to :ad_group
   belongs_to :campaign
