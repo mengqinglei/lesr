@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310173732) do
+ActiveRecord::Schema.define(:version => 20130311041106) do
 
   create_table "account_groups", :force => true do |t|
     t.string   "name"
@@ -58,12 +58,12 @@ ActiveRecord::Schema.define(:version => 20130310173732) do
   end
 
   create_table "ads", :force => true do |t|
-    t.string   "headline"
-    t.string   "line1"
-    t.string   "line2"
-    t.string   "display_url"
+    t.text     "headline"
+    t.text     "line1"
+    t.text     "line2"
+    t.text     "display_url"
     t.string   "google_ad_id"
-    t.string   "destination_url"
+    t.text     "destination_url"
     t.integer  "ad_group_id"
     t.integer  "campaign_id"
     t.integer  "account_id"

@@ -20,7 +20,7 @@ class GoogleDomainDataImporter
               impression: domain_stat.impression + impression.to_i,
               click: domain_stat.click + click.to_i,
               cost: domain_stat.cost + cost.to_f,
-              conversion: conversion + conversion.to_i,
+              conversion: domain_stat.conversion + conversion.to_i,
               campaign_id: cam.id, account_id: acc.id })
           else
               domain_stat.update_attributes({
