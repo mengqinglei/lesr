@@ -6,14 +6,14 @@ class BingKeywordDataImporter
   def perform
     upload_id = options["upload_id"]
     raw_file = Upload.find(upload_id)
-     file = CSV.parse(raw_file.data.gsub("\"",""))
+     file = CSV.parse(raw_file.data.gsub("\"",""), col_sep: "\t")
      file.pop.pop #Get rid of the last two line at the end of file
      date_string = file.drop(1).take(1).join.split(":")[1]
      period = Date.parse(date_string)
 
 
      headers = file.drop(9).take(1)[0]
-
+     p headers
      p order = [headers.index("Account name"),
        headers.index("Campaign name"),
        headers.index("Ad group"),
