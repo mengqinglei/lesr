@@ -23,6 +23,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-fileupload-rails'
+gem 'resque-status'
 
 group :production do
   gem 'wkhtmltopdf-heroku', :git => 'git://github.com/camdez/wkhtmltopdf-heroku.git'

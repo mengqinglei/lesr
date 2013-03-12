@@ -1,13 +1,18 @@
 class GoogleKeywordDataImporter
+  include Resque::Plugins::Status
+  
   @queue = :report_queue
-  def self.perform(upload_id)
-     raw_file = Upload.find(upload_id)
+
+  def perform
+    upload_id = options["upload_id"]
+    raw_file = Upload.find(upload_id)
      file = CSV.parse(raw_file.data, quote_char: "`", col_sep: "\t")
      file.pop #Get rid of the total line at the end of file
      date_string = file.drop(4).take(1)[0].to_s
      period = Upload.get_day(date_string)
-
-       file.drop(6).each do |line|
+     total = file.size - 6
+       file.drop(6).each_with_index do |line, index|
+         at(index + 1, total, "At #{index + 1} of #{total}")
          account, campaign, keyword, ad_group,
            impression, click,_, _, cost, position, conversion, _, _ = line
 

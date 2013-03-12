@@ -10,28 +10,23 @@ class DatasController < ApplicationController
     bing_keyword_data_file = params[:bing_keyword_data]
 
     if auto_domain_data_file
-      Resque.enqueue(GoogleDomainDataImporter,
-                     Upload.create(data: auto_domain_data_file.read, upload_type: "AutomaticDomainStat").id)
+      GoogleDomainDataImporter.create upload_id: Upload.create(data: auto_domain_data_file.read, upload_type: "AutomaticDomainStat").id
     end
 
     if managed_domain_data_file
-      Resque.enqueue(GoogleDomainDataImporter,
-                     Upload.create(data: managed_domain_data_file.read, upload_type: "ManagedDomainStat").id)
+      GoogleDomainDataImporter.create upload_id: Upload.create(data: managed_domain_data_file.read, upload_type: "ManagedDomainStat").id
     end
 
     if keyword_data_file
-      Resque.enqueue(GoogleKeywordDataImporter,
-                     Upload.create(data: keyword_data_file.read, upload_type: "KeywordStat").id)
+      GoogleKeywordDataImporter.create upload_id: Upload.create(data: keyword_data_file.read, upload_type: "KeywordStat").id
     end
 
     if ad_data_file
-      Resque.enqueue(GoogleAdDataImporter,
-                     Upload.create(data: ad_data_file.read, upload_type: "AdStat").id)
+      GoogleAdDataImporter.create upload_id: Upload.create(data: ad_data_file.read, upload_type: "AdStat").id
     end
 
     if bing_keyword_data_file
-      Resque.enqueue(BingKeywordDataImporter,
-                     Upload.create(data: bing_keyword_data_file.read, upload_type: "KeywordStat").id)
+      BingKeywordDataImporter.create upload_id: Upload.create(data: bing_keyword_data_file.read, upload_type: "KeywordStat").id
     end
 
 

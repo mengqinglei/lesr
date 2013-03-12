@@ -1,11 +1,17 @@
 class GoogleAdDataImporter
+  include Resque::Plugins::Status
+
   require 'csv'
   @queue = :report_queue
-  def self.perform(upload_id)
+
+  def perform
+    upload_id = options["upload_id"]
     raw_file = Upload.find(upload_id)
     file = CSV.parse(raw_file.data, quote_char: "`", col_sep: "\t")#.unpack('C*').pack('U*')) #remove non UTF-8 char
     file.pop #Get rid of the total line at the end of file
-      file.drop(6).each do |line|
+      total = file.size - 6
+      file.drop(6).each_with_index do |line, index|
+        at(index+1, total, "At #{index+1} of #{total}")
         account, campaign, ad_group, google_ad_id,
           headline, line1, line2, display_url, destination_url,
           impression, click, _, _, cost, conversion, _, _ = line
