@@ -191,7 +191,7 @@ class AccountGroup < ActiveRecord::Base
     total[9] = total[2].to_f/total[7] rescue 0
     total[10] = ""
 
-    data.each{|x| x[-1] = "N/A" if x[-1].infinite?}
+    data.each{|x| x[-1] = "N/A" if x[-1].infinite? || x[-1].nan? }
     p good_cps = data.map{|x| x[-1]}.select{|x| x!="N/A"}
     p average_cps = good_cps.sort[good_cps.count/2]
     data.map{|x| x.push( recommend(x[-1], average_cps))}

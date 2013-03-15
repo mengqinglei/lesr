@@ -49,6 +49,7 @@
   <div class="span12">
     <h4>Monthly Summary Data per Vendor</h4>
     <% raw_data, vendor_split = @account_group.vendor_split(@session["date"])%>
+    <%=p vendor_split%>
 
     <% if raw_data.count == 1 %>
       <%="There is only data from #{raw_data[0][0]}"%>

@@ -14,7 +14,7 @@ class GoogleAdDataImporter
         at(index+1, total, "At #{index+1} of #{total}")
         account, campaign, ad_group, google_ad_id,
           headline, line1, line2, display_url, destination_url,
-          impression, click, _, _, cost, conversion, _, _ = line[0]
+          impression, click, _, _, cost, conversion, _, _ = line
         period = Upload.get_day(file.drop(4).take(1)[0].to_s)
 
         acc = Account.where(name: account, vendor: "Google").first_or_create
